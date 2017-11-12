@@ -20,6 +20,9 @@ public class RegisterFrame {
 	private JTextField confirmPasswordTextField;
 	private static JTextField ageTextField;
 	private JTextField emailTextField;
+	private JTextField firstnameTextField;
+	private JTextField lastnameTextField;
+
 
 	/**
 	 * Launch the application.
@@ -138,6 +141,16 @@ public class RegisterFrame {
 		lblRegisterUser.setFont(new Font("Tahoma", Font.PLAIN, 30));
 		lblRegisterUser.setBounds(130, 16, 219, 42);
 		frame.getContentPane().add(lblRegisterUser);
+
+		JLabel lblFName = new JLabel("First Name");
+		lblFName.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		lblFName.setBounds(15, 60, 160, 30);
+		frame.getContentPane().add(lblFName);
+
+		JLabel lblLName = new JLabel("Last Name");
+		lblLName.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		lblLName.setBounds(15, 90, 160, 30);
+		frame.getContentPane().add(lblLName);
 		
 		JLabel lblUsername = new JLabel("Username");
 		lblUsername.setFont(new Font("Tahoma", Font.PLAIN, 20));
@@ -146,22 +159,22 @@ public class RegisterFrame {
 		
 		JLabel lblPassword = new JLabel("Password");
 		lblPassword.setFont(new Font("Tahoma", Font.PLAIN, 20));
-		lblPassword.setBounds(15, 170, 160, 30);
+		lblPassword.setBounds(15, 150, 160, 30);
 		frame.getContentPane().add(lblPassword);
 		
 		JLabel lblConfirmPassword = new JLabel("Confirm Password");
 		lblConfirmPassword.setFont(new Font("Tahoma", Font.PLAIN, 20));
-		lblConfirmPassword.setBounds(15, 220, 160, 30);
+		lblConfirmPassword.setBounds(15, 180, 160, 30);
 		frame.getContentPane().add(lblConfirmPassword);
 		
 		JLabel lblAge = new JLabel("Age");
 		lblAge.setFont(new Font("Tahoma", Font.PLAIN, 20));
-		lblAge.setBounds(15, 270, 160, 30);
+		lblAge.setBounds(15, 210, 160, 30);
 		frame.getContentPane().add(lblAge);
 		
 		JLabel lblEmail = new JLabel("Email");
 		lblEmail.setFont(new Font("Tahoma", Font.PLAIN, 20));
-		lblEmail.setBounds(15, 320, 160, 30);
+		lblEmail.setBounds(15, 240, 160, 30);
 		frame.getContentPane().add(lblEmail);
 		
 		JButton btnCancel = new JButton("Cancel");
@@ -207,6 +220,24 @@ public class RegisterFrame {
 	
 		btnOk.setBounds(362, 413, 115, 29);
 		frame.getContentPane().add(btnOk);
+
+		firstnameTextField = new JTextField();
+		firstnameTextField.setBounds(215, 60, 160, 30);
+		frame.getContentPane().add(firstnameTextField);
+		firstnameTextField.setColumns(10);
+
+		TextPrompt firstNamePrompt = new TextPrompt("First Name", firstnameTextField);
+		firstNamePrompt.setForeground(Color.GRAY);
+		firstNamePrompt.changeAlpha(150);
+
+		lastnameTextField = new JTextField();
+		lastnameTextField.setBounds(215, 90, 160, 30);
+		frame.getContentPane().add(lastnameTextField);
+		lastnameTextField.setColumns(10);
+
+		TextPrompt lastNamePrompt = new TextPrompt("Last Name", lastnameTextField);
+		lastNamePrompt.setForeground(Color.GRAY);
+		lastNamePrompt.changeAlpha(150);
 		
 		usernameTextField = new JTextField();
 		usernameTextField.setBounds(215, 120, 160, 30);
@@ -218,7 +249,7 @@ public class RegisterFrame {
 		usernamePrompt.changeAlpha(150);
 		
 		passwordTextField = new JTextField();
-		passwordTextField.setBounds(215, 170, 160, 30);
+		passwordTextField.setBounds(215, 150, 160, 30);
 		frame.getContentPane().add(passwordTextField);
 		passwordTextField.setColumns(10);
 		
@@ -227,7 +258,7 @@ public class RegisterFrame {
 		passwordPrompt.changeAlpha(150);
 		
 		confirmPasswordTextField = new JTextField();
-		confirmPasswordTextField.setBounds(215, 220, 160, 30);
+		confirmPasswordTextField.setBounds(215, 180, 160, 30);
 		frame.getContentPane().add(confirmPasswordTextField);
 		confirmPasswordTextField.setColumns(10);
 		
@@ -237,7 +268,7 @@ public class RegisterFrame {
 		
 		
 		ageTextField = new JTextField();
-		ageTextField.setBounds(215, 270, 160, 30);
+		ageTextField.setBounds(215, 210, 160, 30);
 		frame.getContentPane().add(ageTextField);
 		ageTextField.setColumns(10);
 		
@@ -247,7 +278,7 @@ public class RegisterFrame {
 		
 		
 		emailTextField = new JTextField();
-		emailTextField.setBounds(215, 320, 160, 30);
+		emailTextField.setBounds(215, 240, 160, 30);
 		frame.getContentPane().add(emailTextField);
 		emailTextField.setColumns(10);
 		
