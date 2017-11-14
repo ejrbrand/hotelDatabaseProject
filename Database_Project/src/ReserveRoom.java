@@ -1,15 +1,7 @@
-import java.awt.EventQueue;
-
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.SwingConstants;
-import java.awt.Font;
-import javax.swing.JButton;
-import java.awt.GridBagLayout;
-import java.awt.GridBagConstraints;
-import java.awt.Insets;
-import java.awt.event.ActionListener;
+import javax.swing.*;
+import java.awt.*;
 import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 public class ReserveRoom {
 
@@ -105,6 +97,9 @@ public class ReserveRoom {
 		JButton btnLogOut = new JButton("Log Out");
 		btnLogOut.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				mainFrame window = new mainFrame();
+				frame.setVisible(false);
+				mainFrame.main(null);
 			}
 		});
 		btnLogOut.setBounds(315, 410, 160, 30);

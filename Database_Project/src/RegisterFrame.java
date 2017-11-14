@@ -1,16 +1,11 @@
-import java.awt.Color;
-import java.awt.EventQueue;
-
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import java.awt.Font;
-import javax.swing.SwingConstants;
-import javax.swing.plaf.synth.SynthSeparatorUI;
-import javax.swing.JTextField;
-import javax.swing.JButton;
-import java.awt.event.ActionListener;
-import java.awt.event.FocusListener;
+import javax.swing.*;
+import java.awt.*;
 import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
 
 public class RegisterFrame {
 
@@ -22,6 +17,10 @@ public class RegisterFrame {
 	private JTextField emailTextField;
 	private JTextField firstnameTextField;
 	private JTextField lastnameTextField;
+
+	private static final String USERNAME = "root";
+	private static final String PASSWORD = "raj123";
+	private static final String CONN_STRING = "jdbc:mysql://localhost:3306/hotelReservation";
 
 
 	/**
@@ -55,8 +54,7 @@ public class RegisterFrame {
 	 */
 	public static boolean validatePasswordText(String s1, String s2)
 	{
-		if(s1 == s2) return true;
-		return false;
+		return s1 == s2;
 	}
 	
 	/**
@@ -65,9 +63,7 @@ public class RegisterFrame {
 	 */
 	public static boolean validateAgeText()
 	{
-		if(isNumeric(ageTextField.getText()) == true)
-			return true;
-		return false;
+		return isNumeric(ageTextField.getText()) == true;
 	}
 	
 	/**
@@ -84,12 +80,7 @@ public class RegisterFrame {
 	 */
 	public boolean validateField( JTextField f)
 	{
-	  if ( f.getText().equals("") )
-	  {
-	    return false;
-	  }
-	  else
-	    return true; // validation successful
+		return !f.getText().equals("");
 	}
 	
 	public boolean validate()
@@ -182,7 +173,7 @@ public class RegisterFrame {
 			public void actionPerformed(ActionEvent e) {
 				frame.setVisible(false);
 				mainFrame mF = new mainFrame();
-				mF.main(null);
+				mainFrame.main(null);
 			}
 		});
 		btnCancel.setBounds(241, 413, 115, 29);
@@ -204,9 +195,16 @@ public class RegisterFrame {
 							}
 					else
 					{
+						String username = usernameTextField.getText();
+						String fName = firstnameTextField.getText();
+						String lName = lastnameTextField.getText();
+						String pass = passwordTextField.getText();
+						String email = emailTextField.getText();
+						int age = Integer.parseInt(ageTextField.getText());
+						connectToAndQueryDatabase(username, pass, fName, lName, age, email);
 						frame.setVisible(false);
 						LoginFrame lF = new LoginFrame();
-						lF.newScreen();
+						LoginFrame.newScreen();
 					}
 				}
 				else
@@ -286,5 +284,27 @@ public class RegisterFrame {
 		emailPrompt.setForeground(Color.gray);
 		emailPrompt.changeAlpha(150);
 		
+	}
+
+	public void connectToAndQueryDatabase(String username, String password, String firstN, String lastN, int age, String email) {
+
+		try {
+			Connection conn = DriverManager.getConnection(CONN_STRING, USERNAME, PASSWORD);
+			System.out.println("Connected");
+			String sql = "INSERT INTO hotelReservation.guest(`username`,`password`,`first_name`,`last_name`,`age`,`email`) VALUES (?,?,?,?,?,?);";
+			PreparedStatement preparedStatement = conn.prepareStatement(sql);
+			preparedStatement.setString(1, username);
+			preparedStatement.setString(2, password);
+			preparedStatement.setString(3, firstN);
+			preparedStatement.setString(4, lastN);
+			preparedStatement.setInt(5, age);
+			preparedStatement.setString(6, email);
+			preparedStatement.execute();
+			conn.close();
+
+		} catch (SQLException ex) {
+
+			System.out.println(ex);
+		}
 	}
 }

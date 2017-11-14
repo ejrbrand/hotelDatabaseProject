@@ -1,15 +1,8 @@
-import java.awt.Color;
-import java.awt.EventQueue;
-
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.SwingConstants;
-import java.awt.Font;
+import javax.swing.*;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-
-import javax.swing.JTextField;
-import javax.swing.JButton;
+import java.sql.*;
 
 public class LoginFrame {
 
@@ -19,7 +12,11 @@ public class LoginFrame {
 	private JButton btnLogIn;
 	private JLabel lblUserName;
 	private JLabel lblPassword;
-	private JButton btnCancel;
+    private static final String USERNAME = "root";
+    private JButton btnCancel;
+    private static final String PASSWORD = "raj123";
+    private static final String CONN_STRING = "jdbc:mysql://localhost:3306/hotelReservation";
+    private JLabel lblincorrect;
 
 	/**
 	 * Launch the application.
@@ -44,30 +41,23 @@ public class LoginFrame {
 		initialize();
 	}
 
-	/*
-	 * Check if textfields are empty
-	 */
-	public boolean validateField( JTextField f)
-	{
-	  if ( f.getText().equals("") )
-	  {
-	    return false;
-	  }
-	  else
-	    return true; // validation successful
-	}
-	
 	/**
 	 * compares password from both text fields to make sure they are equal
 	 * @param s1 first string to be compared
-	 * @param s2 second string to be compared 
-	 * @return true if passwords match otherwise false
+     * @param s2 second string to be compared
+     * @return true if passwords match otherwise false
 	 */
 	public static boolean validatePasswordText(String s1, String s2)
 	{
-		if(s1 == s2) return true;
-		return false;
-	}
+        return s1 == s2;
+    }
+
+    /*
+     * Check if textfields are empty
+     */
+    public boolean validateField(JTextField f) {
+        return !f.getText().equals("");
+    }
 	
 	/**
 	 * Validates username and password on the LogIn Page
@@ -125,8 +115,7 @@ public class LoginFrame {
 		TextPrompt passwordPrompt = new TextPrompt("Password", passwordTextField);
 		passwordPrompt.setForeground(Color.gray);
 		passwordPrompt.changeAlpha(150);
-		
-		
+
 		
 		btnLogIn = new JButton("Log In");
 		btnLogIn.setBounds(300, 290, 115, 30);
@@ -141,10 +130,16 @@ public class LoginFrame {
 					}
 				else
 				{
-					frame.setVisible(false);
-					ReserveRoom rR = new ReserveRoom();
-					rR.newScreen();
-				}
+                    if (validateCredentials(usernameTextField.getText(), passwordTextField.getText())) {
+                        frame.setVisible(false);
+                        ReserveRoom rR = new ReserveRoom();
+                        ReserveRoom.newScreen();
+                    } else {
+                        frame.getContentPane().add(lblincorrect);
+                        frame.revalidate();
+                        frame.repaint();
+                    }
+                }
 				
 			}
 		});
@@ -156,17 +151,46 @@ public class LoginFrame {
 		lblPassword = new JLabel("Password");
 		lblPassword.setBounds(15, 185, 80, 30);
 		frame.getContentPane().add(lblPassword);
-		
+
+        lblincorrect = new JLabel("Incorrect username or password");
+        lblincorrect.setBounds(15, 250, 350, 30);
+
+
 		btnCancel = new JButton("Cancel");
 		btnCancel.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				frame.setVisible(false);
 				mainFrame mF = new mainFrame();
-				mF.main(null);
-			}
+                mainFrame.main(null);
+            }
 		});
 		btnCancel.setBounds(15, 290, 115, 30);
 		frame.getContentPane().add(btnCancel);
 	}
+
+    boolean validateCredentials(String username, String password) {
+        boolean validate = false;
+        try {
+
+            Connection conn = DriverManager.getConnection(CONN_STRING, USERNAME, PASSWORD);
+            System.out.println("Connected");
+            String sql = "SELECT username,password FROM hotelReservation.guest WHERE guest.username=? AND guest.password=?;";
+            PreparedStatement stmt = conn.prepareStatement(sql);
+            stmt.setString(1, username);
+            stmt.setString(2, password);
+            ResultSet rs = stmt.executeQuery();
+            if (rs.first()) {
+
+                if (rs.getString("username").trim().equals(username) && rs.getString("password").equals(password)) {
+                    validate = true;
+                    return validate;
+                }
+            }
+            conn.close();
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        return validate;
+    }
 
 }
