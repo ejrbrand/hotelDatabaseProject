@@ -6,6 +6,7 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
+import java.util.Properties;
 
 public class RegisterFrame {
 
@@ -18,9 +19,10 @@ public class RegisterFrame {
 	private JTextField firstnameTextField;
 	private JTextField lastnameTextField;
 
-	private static final String USERNAME = "root";
-	private static final String PASSWORD = "raj123";
-	private static final String CONN_STRING = "jdbc:mysql://localhost:3306/hotelReservation";
+	private String host = "team10.mysql.database.azure.com";
+	private String database = "hotelReservation";
+	private String user = "team10@team10";
+	private String password = "Password01!";
 
 
 	/**
@@ -289,7 +291,14 @@ public class RegisterFrame {
 	public void connectToAndQueryDatabase(String username, String password, String firstN, String lastN, int age, String email) {
 
 		try {
-			Connection conn = DriverManager.getConnection(CONN_STRING, USERNAME, PASSWORD);
+			String url = String.format("jdbc:mysql://%s/%s", host, database);
+			Properties properties = new Properties();
+			properties.setProperty("user", user);
+			properties.setProperty("password", this.password);
+			properties.setProperty("useSSL", "true");
+			properties.setProperty("verifyServerCertificate", "true");
+			properties.setProperty("requireSSL", "false");
+			Connection conn = DriverManager.getConnection(url, properties);
 			System.out.println("Connected");
 			String sql = "INSERT INTO hotelReservation.guest(`username`,`password`,`first_name`,`last_name`,`age`,`email`) VALUES (?,?,?,?,?,?);";
 			PreparedStatement preparedStatement = conn.prepareStatement(sql);

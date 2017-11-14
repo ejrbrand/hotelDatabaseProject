@@ -3,6 +3,7 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.*;
+import java.util.Properties;
 
 public class LoginFrame {
 
@@ -12,11 +13,12 @@ public class LoginFrame {
 	private JButton btnLogIn;
 	private JLabel lblUserName;
 	private JLabel lblPassword;
-    private static final String USERNAME = "root";
     private JButton btnCancel;
-    private static final String PASSWORD = "raj123";
-    private static final String CONN_STRING = "jdbc:mysql://localhost:3306/hotelReservation";
     private JLabel lblincorrect;
+    private String host = "team10.mysql.database.azure.com";
+    private String database = "hotelReservation";
+    private String user = "team10@team10";
+    private String password = "Password01!";
 
 	/**
 	 * Launch the application.
@@ -171,8 +173,14 @@ public class LoginFrame {
     boolean validateCredentials(String username, String password) {
         boolean validate = false;
         try {
-
-            Connection conn = DriverManager.getConnection(CONN_STRING, USERNAME, PASSWORD);
+            String url = String.format("jdbc:mysql://%s/%s", host, database);
+            Properties properties = new Properties();
+            properties.setProperty("user", user);
+            properties.setProperty("password", this.password);
+            properties.setProperty("useSSL", "true");
+            properties.setProperty("verifyServerCertificate", "true");
+            properties.setProperty("requireSSL", "false");
+            Connection conn = DriverManager.getConnection(url, properties);
             System.out.println("Connected");
             String sql = "SELECT username,password FROM hotelReservation.guest WHERE guest.username=? AND guest.password=?;";
             PreparedStatement stmt = conn.prepareStatement(sql);
