@@ -1,16 +1,12 @@
-import java.awt.Color;
-import java.awt.EventQueue;
-
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import java.awt.Font;
-import javax.swing.SwingConstants;
-import javax.swing.plaf.synth.SynthSeparatorUI;
-import javax.swing.JTextField;
-import javax.swing.JButton;
-import java.awt.event.ActionListener;
-import java.awt.event.FocusListener;
+import javax.swing.*;
+import java.awt.*;
 import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
+import java.util.Properties;
 
 public class RegisterFrame {
 
@@ -20,6 +16,14 @@ public class RegisterFrame {
 	private JTextField confirmPasswordTextField;
 	private static JTextField ageTextField;
 	private JTextField emailTextField;
+	private JTextField firstnameTextField;
+	private JTextField lastnameTextField;
+
+	private String host = "team10.mysql.database.azure.com";
+	private String database = "hotelReservation";
+	private String user = "team10@team10";
+	private String password = "Password01!";
+
 
 	/**
 	 * Launch the application.
@@ -52,8 +56,7 @@ public class RegisterFrame {
 	 */
 	public static boolean validatePasswordText(String s1, String s2)
 	{
-		if(s1 == s2) return true;
-		return false;
+		return s1 == s2;
 	}
 	
 	/**
@@ -62,9 +65,7 @@ public class RegisterFrame {
 	 */
 	public static boolean validateAgeText()
 	{
-		if(isNumeric(ageTextField.getText()) == true)
-			return true;
-		return false;
+		return isNumeric(ageTextField.getText()) == true;
 	}
 	
 	/**
@@ -81,12 +82,7 @@ public class RegisterFrame {
 	 */
 	public boolean validateField( JTextField f)
 	{
-	  if ( f.getText().equals("") )
-	  {
-	    return false;
-	  }
-	  else
-	    return true; // validation successful
+		return !f.getText().equals("");
 	}
 	
 	public boolean validate()
@@ -138,6 +134,16 @@ public class RegisterFrame {
 		lblRegisterUser.setFont(new Font("Tahoma", Font.PLAIN, 30));
 		lblRegisterUser.setBounds(130, 16, 219, 42);
 		frame.getContentPane().add(lblRegisterUser);
+
+		JLabel lblFName = new JLabel("First Name");
+		lblFName.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		lblFName.setBounds(15, 60, 160, 30);
+		frame.getContentPane().add(lblFName);
+
+		JLabel lblLName = new JLabel("Last Name");
+		lblLName.setFont(new Font("Tahoma", Font.PLAIN, 20));
+		lblLName.setBounds(15, 90, 160, 30);
+		frame.getContentPane().add(lblLName);
 		
 		JLabel lblUsername = new JLabel("Username");
 		lblUsername.setFont(new Font("Tahoma", Font.PLAIN, 20));
@@ -146,22 +152,22 @@ public class RegisterFrame {
 		
 		JLabel lblPassword = new JLabel("Password");
 		lblPassword.setFont(new Font("Tahoma", Font.PLAIN, 20));
-		lblPassword.setBounds(15, 170, 160, 30);
+		lblPassword.setBounds(15, 150, 160, 30);
 		frame.getContentPane().add(lblPassword);
 		
 		JLabel lblConfirmPassword = new JLabel("Confirm Password");
 		lblConfirmPassword.setFont(new Font("Tahoma", Font.PLAIN, 20));
-		lblConfirmPassword.setBounds(15, 220, 160, 30);
+		lblConfirmPassword.setBounds(15, 180, 160, 30);
 		frame.getContentPane().add(lblConfirmPassword);
 		
 		JLabel lblAge = new JLabel("Age");
 		lblAge.setFont(new Font("Tahoma", Font.PLAIN, 20));
-		lblAge.setBounds(15, 270, 160, 30);
+		lblAge.setBounds(15, 210, 160, 30);
 		frame.getContentPane().add(lblAge);
 		
 		JLabel lblEmail = new JLabel("Email");
 		lblEmail.setFont(new Font("Tahoma", Font.PLAIN, 20));
-		lblEmail.setBounds(15, 320, 160, 30);
+		lblEmail.setBounds(15, 240, 160, 30);
 		frame.getContentPane().add(lblEmail);
 		
 		JButton btnCancel = new JButton("Cancel");
@@ -169,7 +175,7 @@ public class RegisterFrame {
 			public void actionPerformed(ActionEvent e) {
 				frame.setVisible(false);
 				mainFrame mF = new mainFrame();
-				mF.main(null);
+				mainFrame.main(null);
 			}
 		});
 		btnCancel.setBounds(241, 413, 115, 29);
@@ -191,9 +197,16 @@ public class RegisterFrame {
 							}
 					else
 					{
+						String username = usernameTextField.getText();
+						String fName = firstnameTextField.getText();
+						String lName = lastnameTextField.getText();
+						String pass = passwordTextField.getText();
+						String email = emailTextField.getText();
+						int age = Integer.parseInt(ageTextField.getText());
+						connectToAndQueryDatabase(username, pass, fName, lName, age, email);
 						frame.setVisible(false);
 						LoginFrame lF = new LoginFrame();
-						lF.newScreen();
+						LoginFrame.newScreen();
 					}
 				}
 				else
@@ -207,6 +220,24 @@ public class RegisterFrame {
 	
 		btnOk.setBounds(362, 413, 115, 29);
 		frame.getContentPane().add(btnOk);
+
+		firstnameTextField = new JTextField();
+		firstnameTextField.setBounds(215, 60, 160, 30);
+		frame.getContentPane().add(firstnameTextField);
+		firstnameTextField.setColumns(10);
+
+		TextPrompt firstNamePrompt = new TextPrompt("First Name", firstnameTextField);
+		firstNamePrompt.setForeground(Color.GRAY);
+		firstNamePrompt.changeAlpha(150);
+
+		lastnameTextField = new JTextField();
+		lastnameTextField.setBounds(215, 90, 160, 30);
+		frame.getContentPane().add(lastnameTextField);
+		lastnameTextField.setColumns(10);
+
+		TextPrompt lastNamePrompt = new TextPrompt("Last Name", lastnameTextField);
+		lastNamePrompt.setForeground(Color.GRAY);
+		lastNamePrompt.changeAlpha(150);
 		
 		usernameTextField = new JTextField();
 		usernameTextField.setBounds(215, 120, 160, 30);
@@ -217,8 +248,8 @@ public class RegisterFrame {
 		usernamePrompt.setForeground(Color.GRAY);
 		usernamePrompt.changeAlpha(150);
 		
-		passwordTextField = new JTextField();
-		passwordTextField.setBounds(215, 170, 160, 30);
+		passwordTextField = new JPasswordField();
+		passwordTextField.setBounds(215, 150, 160, 30);
 		frame.getContentPane().add(passwordTextField);
 		passwordTextField.setColumns(10);
 		
@@ -226,8 +257,8 @@ public class RegisterFrame {
 		passwordPrompt.setForeground(Color.GRAY);
 		passwordPrompt.changeAlpha(150);
 		
-		confirmPasswordTextField = new JTextField();
-		confirmPasswordTextField.setBounds(215, 220, 160, 30);
+		confirmPasswordTextField = new JPasswordField();
+		confirmPasswordTextField.setBounds(215, 180, 160, 30);
 		frame.getContentPane().add(confirmPasswordTextField);
 		confirmPasswordTextField.setColumns(10);
 		
@@ -237,7 +268,7 @@ public class RegisterFrame {
 		
 		
 		ageTextField = new JTextField();
-		ageTextField.setBounds(215, 270, 160, 30);
+		ageTextField.setBounds(215, 210, 160, 30);
 		frame.getContentPane().add(ageTextField);
 		ageTextField.setColumns(10);
 		
@@ -247,7 +278,7 @@ public class RegisterFrame {
 		
 		
 		emailTextField = new JTextField();
-		emailTextField.setBounds(215, 320, 160, 30);
+		emailTextField.setBounds(215, 240, 160, 30);
 		frame.getContentPane().add(emailTextField);
 		emailTextField.setColumns(10);
 		
@@ -255,5 +286,34 @@ public class RegisterFrame {
 		emailPrompt.setForeground(Color.gray);
 		emailPrompt.changeAlpha(150);
 		
+	}
+
+	public void connectToAndQueryDatabase(String username, String password, String firstN, String lastN, int age, String email) {
+
+		try {
+			String url = String.format("jdbc:mysql://%s/%s", host, database);
+			Properties properties = new Properties();
+			properties.setProperty("user", user);
+			properties.setProperty("password", this.password);
+			properties.setProperty("useSSL", "true");
+			properties.setProperty("verifyServerCertificate", "true");
+			properties.setProperty("requireSSL", "false");
+			Connection conn = DriverManager.getConnection(url, properties);
+			System.out.println("Connected");
+			String sql = "INSERT INTO hotelReservation.guest(`username`,`password`,`first_name`,`last_name`,`age`,`email`) VALUES (?,?,?,?,?,?);";
+			PreparedStatement preparedStatement = conn.prepareStatement(sql);
+			preparedStatement.setString(1, username);
+			preparedStatement.setString(2, password);
+			preparedStatement.setString(3, firstN);
+			preparedStatement.setString(4, lastN);
+			preparedStatement.setInt(5, age);
+			preparedStatement.setString(6, email);
+			preparedStatement.execute();
+			conn.close();
+
+		} catch (SQLException ex) {
+
+			System.out.println(ex);
+		}
 	}
 }

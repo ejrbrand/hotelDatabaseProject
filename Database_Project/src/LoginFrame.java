@@ -1,25 +1,24 @@
-import java.awt.Color;
-import java.awt.EventQueue;
-
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.SwingConstants;
-import java.awt.Font;
+import javax.swing.*;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-
-import javax.swing.JTextField;
-import javax.swing.JButton;
+import java.sql.*;
+import java.util.Properties;
 
 public class LoginFrame {
 
 	private JFrame frame;
 	private JTextField usernameTextField;
-	private JTextField passwordTextField;
 	private JButton btnLogIn;
 	private JLabel lblUserName;
 	private JLabel lblPassword;
-	private JButton btnCancel;
+    private JButton btnCancel;
+    private JLabel lblincorrect;
+    private String host = "team10.mysql.database.azure.com";
+    private String database = "hotelReservation";
+    private String user = "team10@team10";
+    private String password = "Password01!";
+    private JPasswordField passwordField;
 
 	/**
 	 * Launch the application.
@@ -44,30 +43,23 @@ public class LoginFrame {
 		initialize();
 	}
 
-	/*
-	 * Check if textfields are empty
-	 */
-	public boolean validateField( JTextField f)
-	{
-	  if ( f.getText().equals("") )
-	  {
-	    return false;
-	  }
-	  else
-	    return true; // validation successful
-	}
-	
 	/**
 	 * compares password from both text fields to make sure they are equal
 	 * @param s1 first string to be compared
-	 * @param s2 second string to be compared 
-	 * @return true if passwords match otherwise false
+     * @param s2 second string to be compared
+     * @return true if passwords match otherwise false
 	 */
 	public static boolean validatePasswordText(String s1, String s2)
 	{
-		if(s1 == s2) return true;
-		return false;
-	}
+        return s1 == s2;
+    }
+
+    /*
+     * Check if textfields are empty
+     */
+    public boolean validateField(JTextField f) {
+        return !f.getText().equals("");
+    }
 	
 	/**
 	 * Validates username and password on the LogIn Page
@@ -82,7 +74,7 @@ public class LoginFrame {
 		}
 		else
 			
-			if(!validateField(passwordTextField))
+			if(!validateField(passwordField))
 			{
 				System.out.println("Field cannot be empty");
 				return false;
@@ -116,17 +108,15 @@ public class LoginFrame {
 		usernamePrompt.setForeground(Color.gray);
 		usernamePrompt.changeAlpha(150);
 		
+		passwordField = new JPasswordField();
+		passwordField.setBounds(15, 215, 400, 30);
+		frame.getContentPane().add(passwordField);
 		
-		passwordTextField = new JTextField();
-		passwordTextField.setBounds(15, 215, 400, 30);
-		frame.getContentPane().add(passwordTextField);
-		passwordTextField.setColumns(10);
 		
-		TextPrompt passwordPrompt = new TextPrompt("Password", passwordTextField);
+		TextPrompt passwordPrompt = new TextPrompt("Password", passwordField);
 		passwordPrompt.setForeground(Color.gray);
 		passwordPrompt.changeAlpha(150);
-		
-		
+
 		
 		btnLogIn = new JButton("Log In");
 		btnLogIn.setBounds(300, 290, 115, 30);
@@ -135,16 +125,22 @@ public class LoginFrame {
 			public void actionPerformed(ActionEvent e) {
 				validate();
 				if(usernameTextField.getText().isEmpty() == true
-					|| passwordTextField.getText().isEmpty() == true)
+					|| passwordField.getText().isEmpty() == true)
 					{
 						System.out.println("Must fill out all fields");
 					}
 				else
 				{
-					frame.setVisible(false);
-					ReserveRoom rR = new ReserveRoom();
-					rR.newScreen();
-				}
+                    if (validateCredentials(usernameTextField.getText(), passwordField.getText())) {
+                        frame.setVisible(false);
+                        ReservationPage rR = new ReservationPage();
+                        ReservationPage.newScreen();
+                    } else {
+                        frame.getContentPane().add(lblincorrect);
+                        frame.revalidate();
+                        frame.repaint();
+                    }
+                }
 				
 			}
 		});
@@ -156,17 +152,54 @@ public class LoginFrame {
 		lblPassword = new JLabel("Password");
 		lblPassword.setBounds(15, 185, 80, 30);
 		frame.getContentPane().add(lblPassword);
-		
+
+        lblincorrect = new JLabel("Incorrect username or password");
+        lblincorrect.setBounds(15, 250, 350, 30);
+
+
 		btnCancel = new JButton("Cancel");
 		btnCancel.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				frame.setVisible(false);
 				mainFrame mF = new mainFrame();
-				mF.main(null);
-			}
+                mainFrame.main(null);
+            }
 		});
 		btnCancel.setBounds(15, 290, 115, 30);
 		frame.getContentPane().add(btnCancel);
+		
+		
 	}
+
+    boolean validateCredentials(String username, String password) {
+        boolean validate = false;
+        try {
+            String url = String.format("jdbc:mysql://%s/%s", host, database);
+            Properties properties = new Properties();
+            properties.setProperty("user", user);
+            properties.setProperty("password", this.password);
+            properties.setProperty("useSSL", "true");
+            properties.setProperty("verifyServerCertificate", "true");
+            properties.setProperty("requireSSL", "false");
+            Connection conn = DriverManager.getConnection(url, properties);
+            System.out.println("Connected");
+            String sql = "SELECT username,password FROM hotelReservation.guest WHERE guest.username=? AND guest.password=?;";
+            PreparedStatement stmt = conn.prepareStatement(sql);
+            stmt.setString(1, username);
+            stmt.setString(2, password);
+            ResultSet rs = stmt.executeQuery();
+            if (rs.first()) {
+
+                if (rs.getString("username").trim().equals(username) && rs.getString("password").equals(password)) {
+                    validate = true;
+                    return validate;
+                }
+            }
+            conn.close();
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        return validate;
+    }
 
 }
