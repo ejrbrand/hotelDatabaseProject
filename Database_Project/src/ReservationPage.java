@@ -75,10 +75,7 @@ public class ReservationPage {
 			}
 		});
 		frame.getContentPane().add(btnCancelReservation);
-		
-		JButton btnViewReservation_1 = new JButton("View Reservation");
-		btnViewReservation_1.setBounds(15, 350, 165, 30);
-		frame.getContentPane().add(btnViewReservation_1);
+
 		
 		JButton btnEditReservation = new JButton("Edit Reservation");
 		btnEditReservation.addActionListener(new ActionListener() {

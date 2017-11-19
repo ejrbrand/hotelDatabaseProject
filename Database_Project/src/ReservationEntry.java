@@ -1,9 +1,9 @@
-import java.awt.Container;
-import java.awt.EventQueue;
+import org.jdatepicker.impl.JDatePanelImpl;
+import org.jdatepicker.impl.JDatePickerImpl;
+import org.jdatepicker.impl.UtilDateModel;
 
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import java.awt.Font;
+import javax.swing.*;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.Connection;
@@ -11,19 +11,6 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.Properties;
-
-import javax.swing.SwingConstants;
-
-import org.jdatepicker.impl.JDatePanelImpl;
-import org.jdatepicker.impl.JDatePickerImpl;
-import org.jdatepicker.impl.UtilDateModel;
-
-import javax.swing.JTextField;
-import javax.swing.JComboBox;
-import javax.swing.JList;
-import javax.swing.JSpinner;
-import javax.swing.JTextPane;
-import javax.swing.JButton;
 
 public class ReservationEntry {
 
