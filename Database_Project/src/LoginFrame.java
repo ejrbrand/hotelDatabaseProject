@@ -18,7 +18,10 @@ public class LoginFrame {
     private String database = "hotelReservation";
     private String user = "team10@team10";
     private String password = "Password01!";
+<<<<<<< HEAD
     private JPasswordField passwordField;
+=======
+>>>>>>> master
 
 	/**
 	 * Launch the application.
@@ -131,10 +134,17 @@ public class LoginFrame {
 					}
 				else
 				{
+<<<<<<< HEAD
                     if (validateCredentials(usernameTextField.getText(), passwordField.getText())) {
                         frame.setVisible(false);
                         ReservationPage rR = new ReservationPage();
                         ReservationPage.newScreen();
+=======
+                    if (validateCredentials(usernameTextField.getText(), passwordTextField.getText())) {
+                        frame.setVisible(false);
+                        ReserveRoom rR = new ReserveRoom();
+                        ReserveRoom.newScreen();
+>>>>>>> master
                     } else {
                         frame.getContentPane().add(lblincorrect);
                         frame.revalidate();
