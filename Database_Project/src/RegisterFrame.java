@@ -248,7 +248,11 @@ public class RegisterFrame {
 		usernamePrompt.setForeground(Color.GRAY);
 		usernamePrompt.changeAlpha(150);
 		
+<<<<<<< HEAD
+		passwordTextField = new JPasswordField();
+=======
 		passwordTextField = new JTextField();
+>>>>>>> master
 		passwordTextField.setBounds(215, 150, 160, 30);
 		frame.getContentPane().add(passwordTextField);
 		passwordTextField.setColumns(10);
@@ -257,7 +261,11 @@ public class RegisterFrame {
 		passwordPrompt.setForeground(Color.GRAY);
 		passwordPrompt.changeAlpha(150);
 		
+<<<<<<< HEAD
+		confirmPasswordTextField = new JPasswordField();
+=======
 		confirmPasswordTextField = new JTextField();
+>>>>>>> master
 		confirmPasswordTextField.setBounds(215, 180, 160, 30);
 		frame.getContentPane().add(confirmPasswordTextField);
 		confirmPasswordTextField.setColumns(10);

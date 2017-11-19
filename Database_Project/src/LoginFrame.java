@@ -9,7 +9,6 @@ public class LoginFrame {
 
 	private JFrame frame;
 	private JTextField usernameTextField;
-	private JTextField passwordTextField;
 	private JButton btnLogIn;
 	private JLabel lblUserName;
 	private JLabel lblPassword;
@@ -19,6 +18,10 @@ public class LoginFrame {
     private String database = "hotelReservation";
     private String user = "team10@team10";
     private String password = "Password01!";
+<<<<<<< HEAD
+    private JPasswordField passwordField;
+=======
+>>>>>>> master
 
 	/**
 	 * Launch the application.
@@ -74,7 +77,7 @@ public class LoginFrame {
 		}
 		else
 			
-			if(!validateField(passwordTextField))
+			if(!validateField(passwordField))
 			{
 				System.out.println("Field cannot be empty");
 				return false;
@@ -108,13 +111,12 @@ public class LoginFrame {
 		usernamePrompt.setForeground(Color.gray);
 		usernamePrompt.changeAlpha(150);
 		
+		passwordField = new JPasswordField();
+		passwordField.setBounds(15, 215, 400, 30);
+		frame.getContentPane().add(passwordField);
 		
-		passwordTextField = new JTextField();
-		passwordTextField.setBounds(15, 215, 400, 30);
-		frame.getContentPane().add(passwordTextField);
-		passwordTextField.setColumns(10);
 		
-		TextPrompt passwordPrompt = new TextPrompt("Password", passwordTextField);
+		TextPrompt passwordPrompt = new TextPrompt("Password", passwordField);
 		passwordPrompt.setForeground(Color.gray);
 		passwordPrompt.changeAlpha(150);
 
@@ -126,16 +128,23 @@ public class LoginFrame {
 			public void actionPerformed(ActionEvent e) {
 				validate();
 				if(usernameTextField.getText().isEmpty() == true
-					|| passwordTextField.getText().isEmpty() == true)
+					|| passwordField.getText().isEmpty() == true)
 					{
 						System.out.println("Must fill out all fields");
 					}
 				else
 				{
+<<<<<<< HEAD
+                    if (validateCredentials(usernameTextField.getText(), passwordField.getText())) {
+                        frame.setVisible(false);
+                        ReservationPage rR = new ReservationPage();
+                        ReservationPage.newScreen();
+=======
                     if (validateCredentials(usernameTextField.getText(), passwordTextField.getText())) {
                         frame.setVisible(false);
                         ReserveRoom rR = new ReserveRoom();
                         ReserveRoom.newScreen();
+>>>>>>> master
                     } else {
                         frame.getContentPane().add(lblincorrect);
                         frame.revalidate();
@@ -168,6 +177,8 @@ public class LoginFrame {
 		});
 		btnCancel.setBounds(15, 290, 115, 30);
 		frame.getContentPane().add(btnCancel);
+		
+		
 	}
 
     boolean validateCredentials(String username, String password) {

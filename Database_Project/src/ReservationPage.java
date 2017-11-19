@@ -3,7 +3,7 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class ReserveRoom {
+public class ReservationPage {
 
 	private JFrame frame;
 
@@ -14,7 +14,7 @@ public class ReserveRoom {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					ReserveRoom window = new ReserveRoom();
+					ReservationPage window = new ReservationPage();
 					window.frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -26,7 +26,7 @@ public class ReserveRoom {
 	/**
 	 * Create the application.
 	 */
-	public ReserveRoom() {
+	public ReservationPage() {
 		initialize();
 	}
 
@@ -49,6 +49,9 @@ public class ReserveRoom {
 		btnMakeReservation.setBounds(15, 170, 165, 30);
 		btnMakeReservation.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				frame.setVisible(false);
+				ReservationEntry mF = new ReservationEntry();
+                ReservationEntry.main(null);
 			}
 		});
 		frame.getContentPane().add(btnMakeReservation);
@@ -56,6 +59,13 @@ public class ReserveRoom {
 		JButton btnViewReservation = new JButton("View Reservation");
 		btnViewReservation.setBounds(15, 230, 165, 30);
 		frame.getContentPane().add(btnViewReservation);
+		btnViewReservation.addActionListener(new ActionListener(){
+			public void actionPerformed(ActionEvent e) {
+				frame.setVisible(false);
+				ViewReservation mF = new ViewReservation();
+                ViewReservation.main(null);
+			}
+		});
 		
 		
 		JButton btnCancelReservation = new JButton("Cancel Reservation");
