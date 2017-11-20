@@ -7,20 +7,53 @@ public class User {
 
     Connection connection;
     private String username;
-    private String password;
     private String fName;
     private String lName;
     private String email;
     private int uID;
     private int age;
+    private static User currentUserInstance;
 
-    public User(String username, String password, String email, String fName, String lName, int age) {
+    public User() {
+
+    }
+
+    public User(String username, String email, String fName, String lName, int age) {
         this.age = age;
         this.email = email;
         this.fName = fName;
         this.lName = lName;
         this.username = username;
-        this.password = password;
+        currentUserInstance = this;
+    }
+
+    public User(String username) {
+        this.username = username;
+        DatabaseConnection conn = new DatabaseConnection();
+        connection = conn.getConnection();
+        String sql = "SELECT * FROM hotelReservation.guest WHERE username = ?;";
+        try {
+            PreparedStatement preparedStatement = connection.prepareStatement(sql);
+            preparedStatement.setString(1, username);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            resultSet.first();
+            this.uID = resultSet.getInt(1);
+            this.fName = resultSet.getString(4);
+            this.lName = resultSet.getString(5);
+            this.age = resultSet.getInt(6);
+            this.email = resultSet.getString(7);
+            currentUserInstance = this;
+            connection.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static User getInstance() {
+        if (currentUserInstance == null) {
+            currentUserInstance = new User();
+        }
+        return currentUserInstance;
     }
 
     public int getAge() {
@@ -51,7 +84,8 @@ public class User {
             PreparedStatement preparedStatement = connection.prepareStatement(sql);
             preparedStatement.setString(1, username);
             ResultSet resultSet = preparedStatement.executeQuery();
-            uID = resultSet.getInt(1);
+            resultSet.first();
+            this.uID = resultSet.getInt(1);
 
         } catch (SQLException e) {
             e.printStackTrace();

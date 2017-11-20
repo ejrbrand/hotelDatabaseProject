@@ -124,8 +124,9 @@ public class LoginFrame {
                 } else {
                     if (validateCredentials(usernameTextField.getText(), passwordField.getText())) {
                         frame.setVisible(false);
-                        ReservationPage rR = new ReservationPage();
-                        ReservationPage.newScreen();
+                        User currentUser = new User(usernameTextField.getText());
+                        MainMenuFrame rR = new MainMenuFrame();
+                        MainMenuFrame.newScreen();
                     } else {
                         frame.getContentPane().add(lblincorrect);
                         frame.revalidate();
@@ -152,8 +153,8 @@ public class LoginFrame {
         btnCancel.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 frame.setVisible(false);
-                mainFrame mF = new mainFrame();
-                mainFrame.main(null);
+                launchAppFrame mF = new launchAppFrame();
+                launchAppFrame.main(null);
             }
         });
         btnCancel.setBounds(15, 290, 115, 30);

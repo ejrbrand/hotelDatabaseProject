@@ -14,7 +14,7 @@ public class ViewReservation {
 	/**
 	 * Launch the application.
 	 */
-	public static void main(String[] args) {
+	public static void newScreen(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
@@ -67,8 +67,8 @@ public class ViewReservation {
 		btnDone.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent e) {
 				frame.setVisible(false);
-				ReservationPage rP = new ReservationPage();
-                ReservationPage.newScreen();
+				MainMenuFrame rP = new MainMenuFrame();
+				MainMenuFrame.newScreen();
 			}
 		});
 		frame.getContentPane().add(btnDone);

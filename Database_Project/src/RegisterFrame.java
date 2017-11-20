@@ -160,8 +160,8 @@ public class RegisterFrame {
         btnCancel.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 frame.setVisible(false);
-                mainFrame mF = new mainFrame();
-                mainFrame.main(null);
+                launchAppFrame mF = new launchAppFrame();
+                launchAppFrame.main(null);
             }
         });
         btnCancel.setBounds(241, 413, 115, 29);
@@ -186,8 +186,7 @@ public class RegisterFrame {
                         String email = emailTextField.getText();
                         int age = Integer.parseInt(ageTextField.getText());
                         connectToAndQueryDatabase(username, pass, fName, lName, age, email);
-                        currentUser = new User(username, password, email, fName, lName, age);
-                        int uID = currentUser.getuID();
+                        currentUser = new User(username, email, fName, lName, age);
                         frame.setVisible(false);
                         LoginFrame lF = new LoginFrame();
                         LoginFrame.newScreen();
