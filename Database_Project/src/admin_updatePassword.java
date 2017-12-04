@@ -170,7 +170,7 @@ public class admin_updatePassword {
 		DatabaseConnection conn = new DatabaseConnection();
 		connection = conn.getConnection();
 		
-		String user = User.getInstance().getUsername();
+		String user = usernameTextField.getText();
 		String pass = passwordTextField.getText();
 		
 		try {
