@@ -3,13 +3,19 @@ import javax.swing.table.JTableHeader;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 
 public class ViewReservation {
 
 	private JFrame frame;
 	private JTable table;
-	String[] column_headers = {"Booking ID", "Date Check In","Date Check Out", "No. of People", "Amount Due", "Paid", "Comments"};
+    String[] column_headers = {"Booking ID", "Date Check In", "Date Check Out", "No. of People", "Amount Due", "Paid", "Comments"};
 	String[][] exampleData = {{"01", "2017-02-03", "2017-02-07", "3", "$2000", "True", "SUCKS"}};
+    String[][] data = new String[100][7];
+    Connection connection;
 	private JButton btnDone;
 	/**
 	 * Launch the application.
@@ -47,11 +53,13 @@ public class ViewReservation {
 		lblReservations.setFont(new Font("Tahoma", Font.PLAIN, 30));
 		lblReservations.setBounds(15, 16, 200, 30);
 		frame.getContentPane().add(lblReservations);
-		
-		
-		
-		
-		table = new JTable(exampleData, column_headers);
+
+        data = getReservations();
+        for (int i = 0; i <= 6; i++) {
+            System.out.print(data[0][i] + ", ");
+        }
+
+        table = new JTable(data, column_headers);
 		
 		JTableHeader header = table.getTableHeader();
 		JPanel panel = new JPanel();
@@ -76,4 +84,32 @@ public class ViewReservation {
 		
 		
 	}
+
+    public String[][] getReservations() {
+        DatabaseConnection conn = new DatabaseConnection();
+        connection = conn.getConnection();
+        String reservationData[][] = new String[100][7];
+        int uID = User.getInstance().getuID();
+        try {
+            String sql = "SELECT bookingID, dateCheckIn, dateCheckOut, noOfPeople, amountDue, paid, comments FROM hotelReservation.reservation WHERE uID=?";
+            PreparedStatement statement = connection.prepareStatement(sql);
+            statement.setInt(1, uID);
+            ResultSet rs = statement.executeQuery();
+            int i = 0;
+            while (rs.next()) {
+                reservationData[i][0] = rs.getString(1);
+                reservationData[i][1] = rs.getString(2);
+                reservationData[i][2] = rs.getString(3);
+                reservationData[i][3] = rs.getString(4);
+                reservationData[i][4] = rs.getString(5);
+                reservationData[i][5] = rs.getString(6);
+                reservationData[i][6] = rs.getString(7);
+                i++;
+            }
+            connection.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return reservationData;
+    }
 }
