@@ -72,6 +72,9 @@ public class MainMenuFrame {
 		btnCancelReservation.setBounds(15, 290, 165, 30);
 		btnCancelReservation.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				frame.setVisible(false);
+				CancelReservation cF = new CancelReservation();
+				CancelReservation.newScreen(null);
 			}
 		});
 		frame.getContentPane().add(btnCancelReservation);

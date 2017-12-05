@@ -78,6 +78,15 @@ public class launchAppFrame {
 		mainPane.add(btnLogin);
 		
 		JButton btnAdmin = new JButton("Admin Login");
+		btnAdmin.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				mainPane.setVisible(false);
+				admin lF = new admin();
+				admin.newScreen();
+				frame.setVisible(false);
+			}				
+		});
+		
 		btnAdmin.setBounds(410, 230, 160, 30);
 		mainPane.add(btnAdmin);
 	}
