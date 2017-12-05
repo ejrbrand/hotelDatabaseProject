@@ -1,0 +1,10 @@
+
+sort by bookingID
+String sql = "SELECT bookingID, dateCheckIn, dateCheckOut, noOfPeople, amountDue, paid, comments FROM hotelReservation.reservation ORDER BY bookingID";
+
+sort by checkin
+String sql = "SELECT bookingID, dateCheckIn, dateCheckOut, noOfPeople, amountDue, paid, comments FROM hotelReservation.reservation ORDER BY dateCheckIn";
+
+sort by checkout
+String sql = "SELECT bookingID, dateCheckIn, dateCheckOut, noOfPeople, amountDue, paid, comments FROM hotelReservation.reservation ORDER BY dateCheckOut";
+            
