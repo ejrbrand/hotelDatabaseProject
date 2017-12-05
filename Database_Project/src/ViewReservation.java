@@ -13,7 +13,7 @@ public class ViewReservation {
 	private JFrame frame;
 	private JTable table;
     String[] column_headers = {"Booking ID", "Date Check In", "Date Check Out", "No. of People", "Amount Due", "Paid", "Comments"};
-	String[][] exampleData = {{"101", "2017-02-03", "2017-02-07", "3", "$2000", "True", "SUCKS"}};
+
     String[][] data = new String[100][7];
     Connection connection;
 	private JButton btnDone;
