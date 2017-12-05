@@ -88,6 +88,9 @@ public class MainMenuFrame {
 		JButton btnProvideFeedback = new JButton("Provide Feedback");
 		btnProvideFeedback.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				frame.setVisible(false);
+				FeedbackFrame ff = new FeedbackFrame();
+				FeedbackFrame.newScreen();
 			}
 		});
 		btnProvideFeedback.setBounds(310, 170, 165, 30);
