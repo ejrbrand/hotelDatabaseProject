@@ -1,3 +1,5 @@
+
+
 import javax.swing.*;
 import javax.swing.table.JTableHeader;
 import java.awt.*;
@@ -8,7 +10,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-public class ViewReservation {
+public class adminView {
 
 	private JFrame frame;
 	private JTable table;
@@ -24,7 +26,7 @@ public class ViewReservation {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					ViewReservation window = new ViewReservation();
+					adminView window = new adminView();
 					window.frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -36,7 +38,7 @@ public class ViewReservation {
 	/**
 	 * Create the application.
 	 */
-	public ViewReservation() {
+	public adminView() {
 		initialize();
 	}
 
@@ -55,9 +57,6 @@ public class ViewReservation {
 		frame.getContentPane().add(lblReservations);
 
         data = getReservations();
-        for (int i = 0; i <= 6; i++) {
-            System.out.print(data[0][i] + ", ");
-        }
 
         table = new JTable(data, column_headers);
 		
@@ -75,8 +74,8 @@ public class ViewReservation {
 		btnDone.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent e) {
 				frame.setVisible(false);
-				MainMenuFrame rP = new MainMenuFrame();
-				MainMenuFrame.newScreen();
+				adminFunction rP = new adminFunction();
+				adminFunction.newScreen();
 			}
 		});
 		frame.getContentPane().add(btnDone);
@@ -89,11 +88,9 @@ public class ViewReservation {
         DatabaseConnection conn = new DatabaseConnection();
         connection = conn.getConnection();
         String reservationData[][] = new String[100][7];
-        int uID = User.getInstance().getuID();
         try {
-            String sql = "SELECT bookingID, dateCheckIn, dateCheckOut, noOfPeople, amountDue, paid, comments FROM hotelReservation.reservation WHERE uID=?";
+            String sql = "SELECT * FROM hotelReservation.reservation";
             PreparedStatement statement = connection.prepareStatement(sql);
-            statement.setInt(1, uID);
             ResultSet rs = statement.executeQuery();
             int i = 0;
             while (rs.next()) {

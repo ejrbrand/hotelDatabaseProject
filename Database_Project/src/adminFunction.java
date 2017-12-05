@@ -46,6 +46,8 @@ public class adminFunction {
 		lblReservationPage.setHorizontalAlignment(SwingConstants.LEFT);
 		frame.getContentPane().add(lblReservationPage);
 		
+		//-----------------------------------------
+		
 		JButton btnUpdatePassword = new JButton("Update Password");
 		btnUpdatePassword.setBounds(15, 170, 165, 30);
 		btnUpdatePassword.addActionListener(new ActionListener() {
@@ -57,15 +59,21 @@ public class adminFunction {
 		});
 		frame.getContentPane().add(btnUpdatePassword);
 		
-		JButton TBE = new JButton("TBE");
-		TBE.setBounds(15, 230, 165, 30);
-		TBE.addActionListener(new ActionListener(){
+		//-----------------------------------------
+		
+		JButton admin_View = new JButton("Admin View");
+		admin_View.setBounds(15, 230, 165, 30);
+		admin_View.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent e) {
+				frame.setVisible(false);
+				adminView mF = new adminView();
+				adminView.newScreen(null);
 			}
 		});
-		frame.getContentPane().add(TBE);
+		frame.getContentPane().add(admin_View);
 		
 		
+		//-----------------------------------------
 		JButton TBE2 = new JButton("TBE");
 		TBE2.setBounds(15, 290, 165, 30);
 		TBE2.addActionListener(new ActionListener() {
@@ -74,7 +82,7 @@ public class adminFunction {
 		});
 		frame.getContentPane().add(TBE2);
 
-		
+		//-----------------------------------------
 		JButton TBE3 = new JButton("TBE");
 		TBE3.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -83,13 +91,19 @@ public class adminFunction {
 		TBE3.setBounds(15, 410, 165, 30);
 		frame.getContentPane().add(TBE3);
 		
-		JButton btnProvideFeedback = new JButton("Provide Feedback");
-		btnProvideFeedback.addActionListener(new ActionListener() {
+		//-----------------------------------------
+
+		
+		JButton TBE = new JButton("TBE");
+		TBE.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 			}
 		});
-		btnProvideFeedback.setBounds(310, 170, 165, 30);
-		frame.getContentPane().add(btnProvideFeedback);
+		TBE.setBounds(310, 170, 165, 30);
+		frame.getContentPane().add(TBE);
+		
+		//-----------------------------------------
+
 		
 		JButton btnHelp = new JButton("Help");
 		btnHelp.addActionListener(new ActionListener() {
@@ -99,6 +113,9 @@ public class adminFunction {
 		btnHelp.setBounds(310, 230, 165, 30);
 		frame.getContentPane().add(btnHelp);
 		
+		
+		//-----------------------------------------
+
 		JButton btnLogOut = new JButton("Log Out");
 		btnLogOut.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -109,5 +126,8 @@ public class adminFunction {
 		});
 		btnLogOut.setBounds(315, 410, 160, 30);
 		frame.getContentPane().add(btnLogOut);
+		
+		//-----------------------------------------
+
 	}
 }

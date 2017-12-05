@@ -124,7 +124,6 @@ public class admin {
                 } else {
                     if (validateCredentials(usernameTextField.getText(), passwordField.getText())) {
                         frame.setVisible(false);
-                        User currentUser = new User(usernameTextField.getText());
                         
                         adminFunction rR = new adminFunction();
                         adminFunction.newScreen();

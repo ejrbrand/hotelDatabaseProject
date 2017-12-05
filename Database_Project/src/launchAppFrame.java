@@ -87,7 +87,6 @@ public class launchAppFrame {
 			}				
 		});
 		
-		
 		btnAdmin.setBounds(410, 230, 160, 30);
 		mainPane.add(btnAdmin);
 	}

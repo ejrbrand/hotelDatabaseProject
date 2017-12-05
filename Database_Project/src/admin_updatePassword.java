@@ -14,8 +14,8 @@ public class admin_updatePassword {
 	User currentUser;
 	private JFrame frame;
 	private JTextField usernameTextField;
-	private JTextField passwordTextField;
-	private JTextField confirmPasswordTextField;
+	private JPasswordField passwordTextField;
+	private JPasswordField confirmPasswordTextField;
 
 	/**
 	 * Create the application.
@@ -121,8 +121,23 @@ public class admin_updatePassword {
 							|| confirmPasswordTextField.getText().isEmpty() == true) {
 						System.out.println("Must fill out all fields");
 					}else {
+						int input = JOptionPane.showConfirmDialog(null, "Are you sure you want to delete selected reservation?", null, JOptionPane.INFORMATION_MESSAGE);
+		                System.out.println(input);
+		                if(input == JOptionPane.OK_OPTION)
+		                {
+		                	updatePassword();
+		                    System.out.println("I CLICKED THE OK OPTION");
+		                    // DATABASE DELETE STUFF
+		                    frame.setVisible(false);
+
+		    				adminFunction rP = new adminFunction();
+		    				adminFunction.newScreen();
+		                }
+		                else 
+		                {
+		                    System.out.println("click cancel option");
+		                }
 						
-						updatePassword();
 					}
 				} else
 					System.out.println("error");
@@ -142,9 +157,7 @@ public class admin_updatePassword {
         usernamePrompt.setForeground(Color.GRAY);
         usernamePrompt.changeAlpha(150);
 
-
 		passwordTextField = new JPasswordField();
-		passwordTextField = new JTextField();
 		passwordTextField.setBounds(215, 150, 160, 30);
 		frame.getContentPane().add(passwordTextField);
 		passwordTextField.setColumns(10);
@@ -154,7 +167,6 @@ public class admin_updatePassword {
 		passwordPrompt.changeAlpha(150);
 
 		confirmPasswordTextField = new JPasswordField();
-		confirmPasswordTextField = new JTextField();
 		confirmPasswordTextField.setBounds(215, 180, 160, 30);
 		frame.getContentPane().add(confirmPasswordTextField);
 		confirmPasswordTextField.setColumns(10);
