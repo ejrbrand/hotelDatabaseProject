@@ -89,7 +89,7 @@ public class adminView {
         connection = conn.getConnection();
         String reservationData[][] = new String[100][7];
         try {
-            String sql = "SELECT * FROM hotelReservation.reservation";
+            String sql = "SELECT bookingID, dateCheckIn, dateCheckOut, noOfPeople, amountDue, paid, comments FROM hotelReservation.reservation";
             PreparedStatement statement = connection.prepareStatement(sql);
             ResultSet rs = statement.executeQuery();
             int i = 0;
