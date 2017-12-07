@@ -7,6 +7,8 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.Properties;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 
 public class RegisterFrame {
 
@@ -264,7 +266,36 @@ public class RegisterFrame {
         emailTextField.setBounds(215, 240, 160, 30);
         frame.getContentPane().add(emailTextField);
         emailTextField.setColumns(10);
-
+        emailTextField.addKeyListener(new KeyAdapter() {
+        	public void keyPressed(KeyEvent e) {
+        		if(e.getKeyCode() == KeyEvent.VK_ENTER)
+        		{
+        			if (validate()) {
+                        if (usernameTextField.getText().isEmpty() == true
+                                || passwordTextField.getText().isEmpty() == true
+                                || confirmPasswordTextField.getText().isEmpty() == true
+                                || ageTextField.getText().isEmpty() == true
+                                || emailTextField.getText().isEmpty() == true) {
+                            System.out.println("Must fill out all fields");
+                        } else {
+                            String username = usernameTextField.getText();
+                            String fName = firstnameTextField.getText();
+                            String lName = lastnameTextField.getText();
+                            String pass = passwordTextField.getText();
+                            String email = emailTextField.getText();
+                            int age = Integer.parseInt(ageTextField.getText());
+                            connectToAndQueryDatabase(username, pass, fName, lName, age, email);
+                            currentUser = new User(username, email, fName, lName, age);
+                            frame.setVisible(false);
+                            LoginFrame lF = new LoginFrame();
+                            LoginFrame.newScreen();
+                        }
+                    } else
+                        System.out.println("error");
+        		}
+        	}
+        });
+        
         TextPrompt emailPrompt = new TextPrompt("Email Address", emailTextField);
         emailPrompt.setForeground(Color.gray);
         emailPrompt.changeAlpha(150);
