@@ -3,10 +3,15 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 
 public class adminFunction {
 
 	private JFrame frame;
+    Connection connection;
 
 	/**
 	 * Create the application.
@@ -74,13 +79,29 @@ public class adminFunction {
 		
 		
 		//-----------------------------------------
-		JButton TBE2 = new JButton("TBE");
-		TBE2.setBounds(15, 290, 165, 30);
-		TBE2.addActionListener(new ActionListener() {
+
+        JButton availableroomsbutton = new JButton("Find All Available rooms between 2 dates");
+        availableroomsbutton.setBounds(310, 230, 165, 30);
+        availableroomsbutton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+                frame.setVisible(false);
+                availableRoomsFrame aq = new availableRoomsFrame();
+                availableRoomsFrame.newScreen(null);
 			}
 		});
-		frame.getContentPane().add(TBE2);
+        frame.getContentPane().add(availableroomsbutton);
+
+		JButton archive = new JButton("Archive");
+		archive.setBounds(15, 290, 165, 30);
+		archive.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				frame.setVisible(false);
+				ArchiveFrame aF = new ArchiveFrame();
+				aF.newScreen(null);
+			}
+		});
+		frame.getContentPane().add(archive);
+
 
 		//-----------------------------------------
 		JButton TBE3 = new JButton("TBE");
@@ -102,17 +123,6 @@ public class adminFunction {
 		TBE.setBounds(310, 170, 165, 30);
 		frame.getContentPane().add(TBE);
 		
-		//-----------------------------------------
-
-		
-		JButton btnHelp = new JButton("Help");
-		btnHelp.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-			}
-		});
-		btnHelp.setBounds(310, 230, 165, 30);
-		frame.getContentPane().add(btnHelp);
-		
 		
 		//-----------------------------------------
 
@@ -130,4 +140,31 @@ public class adminFunction {
 		//-----------------------------------------
 
 	}
+	
+	public String[][] sortByBookingID() {
+    	DatabaseConnection conn = new DatabaseConnection();
+        connection = conn.getConnection();
+        String reservationData[][] = new String[100][7];
+        
+        try {
+            String sql = "SELECT bookingID, dateCheckIn, dateCheckOut, noOfPeople, amountDue, paid, comments FROM hotelReservation.reservation ORDER BY bookingID";
+            PreparedStatement statement = connection.prepareStatement(sql);
+            ResultSet rs = statement.executeQuery();
+            int i = 0;
+            while (rs.next()) {
+                reservationData[i][0] = rs.getString(1);
+                reservationData[i][1] = rs.getString(2);
+                reservationData[i][2] = rs.getString(3);
+                reservationData[i][3] = rs.getString(4);
+                reservationData[i][4] = rs.getString(5);
+                reservationData[i][5] = rs.getString(6);
+                reservationData[i][6] = rs.getString(7);
+                i++;
+            }
+            connection.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return reservationData;
+    }
 }
