@@ -74,13 +74,16 @@ public class adminFunction {
 		
 		
 		//-----------------------------------------
-		JButton TBE2 = new JButton("TBE");
-		TBE2.setBounds(15, 290, 165, 30);
-		TBE2.addActionListener(new ActionListener() {
+        JButton availableroomsbutton = new JButton("Find All Available rooms between 2 dates");
+        availableroomsbutton.setBounds(15, 290, 165, 30);
+        availableroomsbutton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+                frame.setVisible(false);
+                availableRoomsFrame aq = new availableRoomsFrame();
+                availableRoomsFrame.newScreen(null);
 			}
 		});
-		frame.getContentPane().add(TBE2);
+        frame.getContentPane().add(availableroomsbutton);
 
 		//-----------------------------------------
 		JButton TBE3 = new JButton("TBE");

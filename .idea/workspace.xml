@@ -2,7 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="54e2e202-e359-4d2c-a1b2-dee34dce8bf7" name="Default" comment="">
+      <change beforePath="" afterPath="$PROJECT_DIR$/Database_Project/src/availableRoomsFrame.java" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change beforePath="$PROJECT_DIR$/Database_Project/src/adminFunction.java" afterPath="$PROJECT_DIR$/Database_Project/src/adminFunction.java" />
+      <change beforePath="$PROJECT_DIR$/Database_Project/src/makeReservationFrame.java" afterPath="$PROJECT_DIR$/Database_Project/src/makeReservationFrame.java" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -17,8 +20,8 @@
       <file leaf-file-name="makeReservationFrame.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Database_Project/src/makeReservationFrame.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="450">
-              <caret line="230" column="1" lean-forward="false" selection-start-line="230" selection-start-column="1" selection-end-line="230" selection-end-column="1" />
+            <state relative-caret-position="1023">
+              <caret line="197" column="23" lean-forward="false" selection-start-line="197" selection-start-column="23" selection-end-line="197" selection-end-column="23" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -26,65 +29,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="LoginFrame.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Database_Project/src/LoginFrame.java">
+      <file leaf-file-name="availableRoomsFrame.java" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/Database_Project/src/availableRoomsFrame.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="334">
-              <caret line="132" column="40" lean-forward="false" selection-start-line="132" selection-start-column="40" selection-end-line="132" selection-end-column="40" />
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="FeedbackFrame.java" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/Database_Project/src/FeedbackFrame.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="240">
-              <caret line="16" column="23" lean-forward="false" selection-start-line="16" selection-start-column="23" selection-end-line="16" selection-end-column="23" />
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="MainMenuFrame.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Database_Project/src/MainMenuFrame.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="883">
-              <caret line="95" column="42" lean-forward="false" selection-start-line="95" selection-start-column="42" selection-end-line="95" selection-end-column="42" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="ViewReservation.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Database_Project/src/ViewReservation.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1500">
-              <caret line="108" column="31" lean-forward="false" selection-start-line="108" selection-start-column="31" selection-end-line="108" selection-end-column="31" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="DatabaseConnection.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Database_Project/src/DatabaseConnection.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="290">
-              <caret line="32" column="1" lean-forward="false" selection-start-line="32" selection-start-column="1" selection-end-line="32" selection-end-column="1" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="User.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Database_Project/src/User.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="390">
-              <caret line="29" column="0" lean-forward="false" selection-start-line="29" selection-start-column="0" selection-end-line="29" selection-end-column="0" />
+            <state relative-caret-position="2220">
+              <caret line="150" column="28" lean-forward="false" selection-start-line="150" selection-start-column="28" selection-end-line="150" selection-end-column="28" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -137,15 +86,18 @@
         <option value="$PROJECT_DIR$/Database_Project/src/RegisterFrame.java" />
         <option value="$PROJECT_DIR$/Database_Project/src/LoginFrame.java" />
         <option value="$PROJECT_DIR$/Database_Project/src/User.java" />
-        <option value="$PROJECT_DIR$/Database_Project/src/makeReservationFrame.java" />
         <option value="$PROJECT_DIR$/Database_Project/src/ViewReservation.java" />
         <option value="$PROJECT_DIR$/Database_Project/src/MainMenuFrame.java" />
         <option value="$PROJECT_DIR$/Database_Project/src/FeedbackFrame.java" />
+        <option value="$PROJECT_DIR$/Database_Project/src/makeReservationFrame.java" />
+        <option value="$PROJECT_DIR$/Database_Project/src/adminFunction.java" />
+        <option value="$PROJECT_DIR$/Database_Project/src/availableRoomsFrame.java" />
       </list>
     </option>
   </component>
   <component name="ProjectFrameBounds" extendedState="6">
-    <option name="y" value="23" />
+    <option name="x" value="191" />
+    <option name="y" value="161" />
     <option name="width" value="1280" />
     <option name="height" value="734" />
   </component>
@@ -429,44 +381,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/Database_Project/src/makeReservationFrame.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Database_Project/src/makeReservationFrame.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Database_Project/src/DateLabelFormatter.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="60">
-          <caret line="7" column="38" lean-forward="false" selection-start-line="7" selection-start-column="38" selection-end-line="7" selection-end-column="38" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Database_Project/src/makeReservationFrame.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1815">
-          <caret line="123" column="26" lean-forward="false" selection-start-line="123" selection-start-column="26" selection-end-line="123" selection-end-column="26" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/Database_Project/src/DateLabelFormatter.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="60">
@@ -767,32 +681,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Database_Project/src/DatabaseConnection.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="290">
-          <caret line="32" column="1" lean-forward="false" selection-start-line="32" selection-start-column="1" selection-end-line="32" selection-end-column="1" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Database_Project/src/ViewReservation.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1500">
-          <caret line="108" column="31" lean-forward="false" selection-start-line="108" selection-start-column="31" selection-end-line="108" selection-end-column="31" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Database_Project/src/makeReservationFrame.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="450">
-          <caret line="230" column="1" lean-forward="false" selection-start-line="230" selection-start-column="1" selection-end-line="230" selection-end-column="1" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/Database_Project/src/LoginFrame.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="334">
@@ -813,8 +701,68 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/Database_Project/src/FeedbackFrame.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="240">
-          <caret line="16" column="23" lean-forward="false" selection-start-line="16" selection-start-column="23" selection-end-line="16" selection-end-column="23" />
+        <state relative-caret-position="255">
+          <caret line="17" column="20" lean-forward="true" selection-start-line="17" selection-start-column="20" selection-end-line="17" selection-end-column="20" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Database_Project/src/CancelReservation.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="30">
+          <caret line="17" column="13" lean-forward="false" selection-start-line="17" selection-start-column="13" selection-end-line="17" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Database_Project/src/adminFunction.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="157">
+          <caret line="76" column="36" lean-forward="false" selection-start-line="76" selection-start-column="36" selection-end-line="76" selection-end-column="36" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Database_Project/src/DatabaseConnection.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="189">
+          <caret line="18" column="49" lean-forward="true" selection-start-line="18" selection-start-column="49" selection-end-line="18" selection-end-column="49" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Database_Project/src/ViewReservation.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="149">
+          <caret line="65" column="26" lean-forward="false" selection-start-line="65" selection-start-column="26" selection-end-line="65" selection-end-column="26" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Database_Project/src/adminView.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-538">
+          <caret line="12" column="13" lean-forward="false" selection-start-line="12" selection-start-column="13" selection-end-line="12" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Database_Project/src/makeReservationFrame.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1023">
+          <caret line="197" column="23" lean-forward="false" selection-start-line="197" selection-start-column="23" selection-end-line="197" selection-end-column="23" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Database_Project/src/availableRoomsFrame.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2220">
+          <caret line="150" column="28" lean-forward="false" selection-start-line="150" selection-start-column="28" selection-end-line="150" selection-end-column="28" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
