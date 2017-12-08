@@ -2,6 +2,8 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 import java.sql.*;
 import java.util.Properties;
 
@@ -104,13 +106,37 @@ public class admin {
 
         passwordField = new JPasswordField();
         passwordField.setBounds(15, 215, 400, 30);
+        passwordField.addKeyListener(new KeyAdapter() {
+        	public void keyPressed(KeyEvent e) {
+        		if(e.getKeyCode() == KeyEvent.VK_ENTER)
+        		{
+        			validate();
+                    if (usernameTextField.getText().isEmpty() == true
+                            || passwordField.getText().isEmpty() == true) {
+                        System.out.println("Must fill out all fields");
+                    } else {
+                        if (validateCredentials(usernameTextField.getText(), passwordField.getText())) {
+                            frame.setVisible(false);
+                            
+                            adminFunction rR = new adminFunction();
+                            adminFunction.newScreen();
+                        } else {
+                            frame.getContentPane().add(lblincorrect);
+                            frame.revalidate();
+                            frame.repaint();
+                        }
+                    }
+        		}
+        	}
+        });
+        
         frame.getContentPane().add(passwordField);
-
+        
 
         TextPrompt passwordPrompt = new TextPrompt("Password", passwordField);
         passwordPrompt.setForeground(Color.gray);
         passwordPrompt.changeAlpha(150);
-
+        
 
         btnLogIn = new JButton("Log In");
         btnLogIn.setBounds(300, 290, 115, 30);

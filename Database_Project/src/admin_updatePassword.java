@@ -6,6 +6,8 @@ import java.awt.event.ActionListener;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 
 public class admin_updatePassword {
 
@@ -121,7 +123,7 @@ public class admin_updatePassword {
 							|| confirmPasswordTextField.getText().isEmpty() == true) {
 						System.out.println("Must fill out all fields");
 					}else {
-						int input = JOptionPane.showConfirmDialog(null, "Are you sure you want to delete selected reservation?", null, JOptionPane.INFORMATION_MESSAGE);
+						int input = JOptionPane.showConfirmDialog(null, "Are you sure you want to change "+ usernameTextField.getText() + "'s" + " password ?", null, JOptionPane.INFORMATION_MESSAGE);
 		                System.out.println(input);
 		                if(input == JOptionPane.OK_OPTION)
 		                {
@@ -170,6 +172,37 @@ public class admin_updatePassword {
 		confirmPasswordTextField.setBounds(215, 180, 160, 30);
 		frame.getContentPane().add(confirmPasswordTextField);
 		confirmPasswordTextField.setColumns(10);
+		confirmPasswordTextField.addKeyListener(new KeyAdapter() {
+			public void keyPressed(KeyEvent e) {
+				if(e.getKeyCode() == KeyEvent.VK_ENTER)
+        		{
+					if (validate()) {
+						if (passwordTextField.getText().isEmpty() == true
+								|| confirmPasswordTextField.getText().isEmpty() == true) {
+							System.out.println("Must fill out all fields");
+						}else {
+							int input = JOptionPane.showConfirmDialog(null, "Are you sure you want to change "+ usernameTextField.getText() + "'s" + " password ?", null, JOptionPane.INFORMATION_MESSAGE);
+			                System.out.println(input);
+			                if(input == JOptionPane.OK_OPTION)
+			                {
+			                	updatePassword();
+			                    System.out.println("I CLICKED THE OK OPTION");
+			                    // DATABASE DELETE STUFF
+			                    frame.setVisible(false);
+
+			    				adminFunction rP = new adminFunction();
+			    				adminFunction.newScreen();
+			                }
+			                else 
+			                {
+			                    System.out.println("click cancel option");
+			                }
+							
+						}
+					} else
+						System.out.println("error");        		}
+			}
+		});
 
 		TextPrompt confirmPasswordPrompt = new TextPrompt("Confirm Password", confirmPasswordTextField);
 		confirmPasswordPrompt.setForeground(Color.GRAY);
