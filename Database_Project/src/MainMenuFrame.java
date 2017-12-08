@@ -86,7 +86,7 @@ public class MainMenuFrame {
 			}
 		});
 		btnEditReservation.setBounds(15, 410, 165, 30);
-		frame.getContentPane().add(btnEditReservation);
+		//frame.getContentPane().add(btnEditReservation);
 		
 		JButton btnProvideFeedback = new JButton("Provide Feedback");
 		btnProvideFeedback.addActionListener(new ActionListener() {
@@ -105,7 +105,7 @@ public class MainMenuFrame {
 			}
 		});
 		btnHelp.setBounds(310, 230, 165, 30);
-		frame.getContentPane().add(btnHelp);
+		//frame.getContentPane().add(btnHelp);
 		
 		JButton btnLogOut = new JButton("Log Out");
 		btnLogOut.addActionListener(new ActionListener() {

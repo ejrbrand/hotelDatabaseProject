@@ -4,6 +4,10 @@ import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowEvent;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -13,16 +17,19 @@ import javax.swing.JPanel;
 import javax.swing.JTable;
 import javax.swing.event.TableModelEvent;
 import javax.swing.event.TableModelListener;
+import javax.swing.table.DefaultTableModel;
 import javax.swing.table.JTableHeader;
 
 public class CancelReservation {
 
 	private JFrame frame;
 	private JTable table;
+	DefaultTableModel model;
 	String[] column_headers = {"Booking ID", "Date Check In","Date Check Out", "No. of People", "Amount Due", "Paid", "Comments"};
-	String[][] exampleData = {{"01", "2017-02-03", "2017-02-07", "3", "$2000", "True", "SUCKS"}};
+	String[][] data = new String[100][7];
 	private JButton btnDelete;
 	private JButton btnCancel;
+	Connection connection;
 
 	/**
 	 * Launch the application.
@@ -63,17 +70,9 @@ public class CancelReservation {
 		frame.getContentPane().add(lblReservations);
 		
 		
-		
-		
-		table = new JTable(exampleData, column_headers);
-		table.getModel().addTableModelListener(new TableModelListener() {
-
-		      public void tableChanged(TableModelEvent e) {
-		    	  
-		    	  
-		         //database changes RAJ
-		      }
-		    });
+		data = getReservations();
+		model = new DefaultTableModel(data,column_headers);
+		table = new JTable(model);
 		
 		JTableHeader header = table.getTableHeader();
 		JPanel panel = new JPanel();
@@ -88,12 +87,15 @@ public class CancelReservation {
 		btnDelete.setBounds(727, 312, 150, 30);
 		btnDelete.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent e){
+				int row = table.getSelectedRow();
+				int selectedBookingID = Integer.parseInt(model.getValueAt(row,0).toString());
+                System.out.println(selectedBookingID);
 		    	int input = JOptionPane.showConfirmDialog(null, "Are you sure you want to delete selected reservation?", null, JOptionPane.INFORMATION_MESSAGE);
 		        System.out.println(input);
 		        if(input == JOptionPane.OK_OPTION)
 		        {
 		        	System.out.println("I CLICKED THE OK OPTION");
-		        	// DATABASE DELETE STUFF
+		        	deleteReservationFromDatabase(selectedBookingID);
 		        	frame.setVisible(false);
 		        	MainMenuFrame rP = new MainMenuFrame();
 		        	MainMenuFrame.newScreen();
@@ -121,6 +123,48 @@ public class CancelReservation {
 		frame.getContentPane().add(btnCancel);
 		
 		
+	}
+
+	public void deleteReservationFromDatabase(int bookingID)	{
+		DatabaseConnection conn = new DatabaseConnection();
+		connection = conn.getConnection();
+		String sql = "DELETE FROM reservation WHERE bookingID = ?";
+		try {
+			PreparedStatement statement = connection.prepareStatement(sql);
+			statement.setInt(1,bookingID);
+			statement.executeUpdate();
+			connection.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
+
+	public String[][] getReservations() {
+		DatabaseConnection conn = new DatabaseConnection();
+		connection = conn.getConnection();
+		String reservationData[][] = new String[100][7];
+		int uID = User.getInstance().getuID();
+		try {
+			String sql = "SELECT bookingID, dateCheckIn, dateCheckOut, noOfPeople, amountDue, paid, comments FROM hotelReservation.reservation WHERE uID=?";
+			PreparedStatement statement = connection.prepareStatement(sql);
+			statement.setInt(1, uID);
+			ResultSet rs = statement.executeQuery();
+			int i = 0;
+			while (rs.next()) {
+				reservationData[i][0] = rs.getString(1);
+				reservationData[i][1] = rs.getString(2);
+				reservationData[i][2] = rs.getString(3);
+				reservationData[i][3] = rs.getString(4);
+				reservationData[i][4] = rs.getString(5);
+				reservationData[i][5] = rs.getString(6);
+				reservationData[i][6] = rs.getString(7);
+				i++;
+			}
+			connection.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return reservationData;
 	}
 
 }
