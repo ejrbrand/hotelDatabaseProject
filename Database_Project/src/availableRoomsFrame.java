@@ -3,31 +3,31 @@ import org.jdatepicker.impl.JDatePickerImpl;
 import org.jdatepicker.impl.UtilDateModel;
 
 import javax.swing.*;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.table.JTableHeader;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.*;
 import java.util.Properties;
 
-public class makeReservationFrame {
+public class availableRoomsFrame {
 
+    Connection connection;
+    DefaultTableModel model;
+    JScrollPane pane;
+    String[] column_headers = {"RoomID", "Room Type"};
+    String[][] data = new String[100][2];
     private JFrame frame;
-    private JTextField textFieldNumberOfGuests;
-
-    private Connection connection;
-
     private String arrivalDate;
     private String departureDate;
-    private int noOfGuestsSelection;
     private String roomTypeSelection;
-    private String comments;
-    private String username;
-    private int price;
+    private JTable table;
 
     /**
      * Create the application.
      */
-    public makeReservationFrame() {
+    public availableRoomsFrame() {
         initialize();
     }
 
@@ -38,7 +38,7 @@ public class makeReservationFrame {
         EventQueue.invokeLater(new Runnable() {
             public void run() {
                 try {
-                    makeReservationFrame window = new makeReservationFrame();
+                    availableRoomsFrame window = new availableRoomsFrame();
                     window.frame.setVisible(true);
                 } catch (Exception e) {
                     e.printStackTrace();
@@ -56,40 +56,10 @@ public class makeReservationFrame {
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.getContentPane().setLayout(null);
 
-        JLabel lblMakeReservationLabel = new JLabel("Make Reservation");
-        lblMakeReservationLabel.setHorizontalAlignment(SwingConstants.LEFT);
-        lblMakeReservationLabel.setFont(new Font("Tahoma", Font.PLAIN, 30));
-        lblMakeReservationLabel.setBounds(50, 40, 300, 30);
-        frame.getContentPane().add(lblMakeReservationLabel);
-
         JLabel lblArrivalDate = new JLabel("Arrival Date");
         lblArrivalDate.setFont(new Font("Tahoma", Font.PLAIN, 20));
         lblArrivalDate.setBounds(50, 150, 150, 30);
         frame.getContentPane().add(lblArrivalDate);
-
-        JLabel lblNumberOfGuests = new JLabel("No. Of Guests");
-        lblNumberOfGuests.setFont(new Font("Tahoma", Font.PLAIN, 20));
-        lblNumberOfGuests.setBounds(50, 310, 150, 30);
-        frame.getContentPane().add(lblNumberOfGuests);
-
-        JLabel lblComments = new JLabel("Comments");
-        lblComments.setFont(new Font("Tahoma", Font.PLAIN, 20));
-        lblComments.setBounds(50, 390, 150, 30);
-        frame.getContentPane().add(lblComments);
-
-        textFieldNumberOfGuests = new JTextField();
-        textFieldNumberOfGuests.setBounds(215, 310, 150, 30);
-        frame.getContentPane().add(textFieldNumberOfGuests);
-        textFieldNumberOfGuests.setColumns(10);
-
-        JTextPane commentsTextPane = new JTextPane();
-        commentsTextPane.setBounds(215, 390, 500, 200);
-        frame.getContentPane().add(commentsTextPane);
-
-        JLabel lblRoomType = new JLabel("Room Type");
-        lblRoomType.setFont(new Font("Tahoma", Font.PLAIN, 20));
-        lblRoomType.setBounds(400, 310, 150, 30);
-        frame.getContentPane().add(lblRoomType);
 
         JLabel lblDepartureDate = new JLabel("Departure Date");
         lblDepartureDate.setFont(new Font("Tahoma", Font.PLAIN, 20));
@@ -126,33 +96,28 @@ public class makeReservationFrame {
         departureDatePicker.setBounds(565, 150, 150, 30);
         frame.getContentPane().add(departureDatePicker);
 
-        String[] roomType = {"Standard", "Deluxe", "Luxury", "Suite", "Villa"};
+        JLabel lblRoomType = new JLabel("Room Type");
+        lblRoomType.setFont(new Font("Tahoma", Font.PLAIN, 20));
+        lblRoomType.setBounds(400, 310, 150, 30);
+        frame.getContentPane().add(lblRoomType);
+
+        String[] roomType = {"", "Standard", "Deluxe", "Luxury", "Suite", "Villa"};
         JComboBox roomtypecombobox = new JComboBox(roomType);
         roomtypecombobox.setBounds(565, 310, 150, 30);
         frame.getContentPane().add(roomtypecombobox);
 
-        JButton btnOk = new JButton("Ok");
-        btnOk.setBounds(627, 685, 150, 30);
-        frame.getContentPane().add(btnOk);
-        btnOk.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                arrivalDate = arrivalDatePicker.getJFormattedTextField().getText();
-                System.out.println(arrivalDate);
-                departureDate = departureDatePicker.getJFormattedTextField().getText();
-                System.out.println(departureDate);
-                noOfGuestsSelection = Integer.parseInt(textFieldNumberOfGuests.getText());
-                System.out.println(noOfGuestsSelection);
-                comments = commentsTextPane.getText();
-                String combox = roomtypecombobox.getSelectedItem().toString();
-                roomTypeSelection = combox;
-                System.out.println(roomTypeSelection);
-                insertReservation(arrivalDate, departureDate, noOfGuestsSelection, roomTypeSelection, comments);
-                frame.setVisible(false);
-                MainMenuFrame rP = new MainMenuFrame();
-                MainMenuFrame.newScreen();
-            }
-        });
-        frame.getContentPane().add(btnOk);
+        table = new JTable();
+        JTableHeader header = table.getTableHeader();
+        JPanel panel = new JPanel();
+        panel.setLocation(15, 350);
+        panel.setSize(862, 187);
+        panel.setLayout(new BorderLayout());
+        panel.add(header, BorderLayout.NORTH);
+        panel.add(table, BorderLayout.CENTER);
+        pane = new JScrollPane(table);
+        panel.add(pane, BorderLayout.CENTER);
+        frame.getContentPane().add(panel);
+
 
         JButton btnCancel = new JButton("Cancel");
         btnCancel.setBounds(462, 685, 150, 30);
@@ -160,41 +125,82 @@ public class makeReservationFrame {
         btnCancel.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 frame.setVisible(false);
-                MainMenuFrame rP = new MainMenuFrame();
-                MainMenuFrame.newScreen();
+                adminFunction af = new adminFunction();
+                adminFunction.newScreen();
             }
         });
         frame.getContentPane().add(btnCancel);
 
+        JButton btnOk = new JButton("Ok");
+        btnOk.setBounds(627, 685, 150, 30);
+        frame.getContentPane().add(btnOk);
+        btnOk.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                arrivalDate = arrivalDatePicker.getJFormattedTextField().getText();
+                departureDate = departureDatePicker.getJFormattedTextField().getText();
+                String combox = roomtypecombobox.getSelectedItem().toString();
+                roomTypeSelection = combox;
+                if (roomTypeSelection.equals("")) {
+                    data = findAllAvailableRooms(arrivalDate, departureDate);
+                } else {
+                    data = findAllAvailableRooms(arrivalDate, departureDate, roomTypeSelection);
+                }
+                model = new DefaultTableModel(data, column_headers);
+                table.setModel(model);
+                frame.revalidate();
+                frame.repaint();
+            }
+        });
+        frame.getContentPane().add(btnOk);
     }
 
-    public int assignRoom(String arrivalDate, String departureDate, String roomTypeSelection) {
+    public String[][] findAllAvailableRooms(String arrivalDate, String departureDate) {
+        String data[][] = new String[100][2];
         DatabaseConnection conn = new DatabaseConnection();
+        connection = conn.getConnection();
+        ResultSet availableRooms;
+        try {
+            CallableStatement callableStatement = connection.prepareCall("{call getAvailableRoomsBetweenDates(?, ?)}");
+            callableStatement.setString(1, arrivalDate);
+            callableStatement.setString(2, departureDate);
+            callableStatement.execute();
+            availableRooms = callableStatement.getResultSet();
+            int i = 0;
+            while (availableRooms.next()) {
+                data[i][0] = "" + availableRooms.getInt(1);
+                String sql = "SELECT description FROM roomType NATURAL join room WHERE roomID = ?";
+                PreparedStatement statement = connection.prepareStatement(sql);
+                statement.setInt(1, Integer.parseInt(data[i][0]));
+                ResultSet rs = statement.executeQuery();
+                rs.first();
+                data[i][1] = rs.getString(1);
+                System.out.println(data[i][0] + " " + data[i][1]);
+                i++;
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return data;
+    }
+
+    public String[][] findAllAvailableRooms(String arrivalDate, String departureDate, String roomTypeSelection) {
+        String data[][] = new String[100][2];
+        DatabaseConnection conn = new DatabaseConnection();
+        connection = conn.getConnection();
         int rmType = 0;
-        int assignedRoomID = 0;
         ResultSet availableRooms;
         roomTypeSelection.trim();
-        if (roomTypeSelection.equals("Standard")) {
+        if (roomTypeSelection.equals("Standard"))
             rmType = 1;
-            price = 50;
-        }
-        else if (roomTypeSelection.equals("Deluxe")) {
+        else if (roomTypeSelection.equals("Deluxe"))
             rmType = 2;
-            price = 85;
-        }
-        else if (roomTypeSelection.equals("Luxury")) {
+        else if (roomTypeSelection.equals("Luxury"))
             rmType = 3;
-            price = 130;
-        }
-        else if (roomTypeSelection.equals("Suite")) {
+        else if (roomTypeSelection.equals("Suite"))
             rmType = 4;
-            price = 180;
-        }
-        else if (roomTypeSelection.equals("Villa")) {
+        else if (roomTypeSelection.equals("Villa"))
             rmType = 5;
-            price = 210;
-        }
-        connection = conn.getConnection();
         try {
             CallableStatement callableStatement = connection.prepareCall("{call getAvailableRooms(?, ?, ?)}");
             callableStatement.setString(1, arrivalDate);
@@ -202,37 +208,33 @@ public class makeReservationFrame {
             callableStatement.setInt(3, rmType);
             callableStatement.execute();
             availableRooms = callableStatement.getResultSet();
-            availableRooms.first();
-            assignedRoomID = availableRooms.getInt(1);
+            int i = 0;
+            while (availableRooms.next()) {
+                data[i][0] = "" + availableRooms.getInt(1);
+                data[i][1] = roomTypeSelection;
+                i++;
+            }
             connection.close();
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        System.out.println(assignedRoomID);
-        return assignedRoomID;
+        return data;
     }
 
-    public void insertReservation(String arrivalDate, String departureDate, int noOfGuestsSelection, String roomTypeSelection, String comments) {
-
+    public String roomIDtoroom(int roomID) {
+        DatabaseConnection conn = new DatabaseConnection();
+        connection = conn.getConnection();
+        String description = "";
         try {
-            DatabaseConnection conn = new DatabaseConnection();
-            connection = conn.getConnection();
-            String sql = "INSERT INTO hotelReservation.reservation(`roomID`,`uID`,`dateCheckIn`,`dateCheckOut`,`noOfPeople`,`amountDue`,`paid`,`comments`) VALUES (?,?,?,?,?,?,?,?);";
-            PreparedStatement preparedStatement = connection.prepareStatement(sql);
-            preparedStatement.setInt(1, assignRoom(arrivalDate, departureDate, roomTypeSelection));
-            preparedStatement.setInt(2, User.getInstance().getuID());
-            preparedStatement.setString(3, arrivalDate);
-            preparedStatement.setString(4, departureDate);
-            preparedStatement.setInt(5, noOfGuestsSelection);
-            preparedStatement.setInt(6, price);
-            preparedStatement.setBoolean(7, false);
-            preparedStatement.setString(8, comments);
-            preparedStatement.execute();
-            connection.close();
-
+            String sql = "SELECT description FROM roomType NATURAL join room WHERE roomID = ?";
+            PreparedStatement statement = connection.prepareStatement(sql);
+            statement.setInt(1, roomID);
+            ResultSet rs = statement.executeQuery();
+            rs.first();
+            description = rs.getString(1);
         } catch (SQLException ex) {
-
-            System.out.println(ex);
+            ex.printStackTrace();
         }
+        return description;
     }
 }

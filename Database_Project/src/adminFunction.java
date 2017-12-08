@@ -79,6 +79,18 @@ public class adminFunction {
 		
 		
 		//-----------------------------------------
+
+        JButton availableroomsbutton = new JButton("Find All Available rooms between 2 dates");
+        availableroomsbutton.setBounds(310, 230, 165, 30);
+        availableroomsbutton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+                frame.setVisible(false);
+                availableRoomsFrame aq = new availableRoomsFrame();
+                availableRoomsFrame.newScreen(null);
+			}
+		});
+        frame.getContentPane().add(availableroomsbutton);
+
 		JButton archive = new JButton("Archive");
 		archive.setBounds(15, 290, 165, 30);
 		archive.addActionListener(new ActionListener() {
@@ -89,6 +101,7 @@ public class adminFunction {
 			}
 		});
 		frame.getContentPane().add(archive);
+
 
 		//-----------------------------------------
 		JButton TBE3 = new JButton("TBE");
@@ -109,17 +122,6 @@ public class adminFunction {
 		});
 		TBE.setBounds(310, 170, 165, 30);
 		frame.getContentPane().add(TBE);
-		
-		//-----------------------------------------
-
-		
-		JButton btnHelp = new JButton("Help");
-		btnHelp.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-			}
-		});
-		btnHelp.setBounds(310, 230, 165, 30);
-		frame.getContentPane().add(btnHelp);
 		
 		
 		//-----------------------------------------
