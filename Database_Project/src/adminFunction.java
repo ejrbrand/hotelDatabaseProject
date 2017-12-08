@@ -104,9 +104,11 @@ public class adminFunction {
 
 
 		//-----------------------------------------
-		JButton TBE3 = new JButton("TBE");
+		JButton TBE3 = new JButton("Booking by Date");
 		TBE3.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				frame.setVisible(false);
+				adminCount.newScreen();
 			}
 		});
 		TBE3.setBounds(15, 410, 165, 30);
