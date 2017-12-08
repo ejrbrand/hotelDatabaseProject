@@ -2,10 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="54e2e202-e359-4d2c-a1b2-dee34dce8bf7" name="Default" comment="">
-      <change beforePath="" afterPath="$PROJECT_DIR$/Database_Project/src/availableRoomsFrame.java" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change beforePath="$PROJECT_DIR$/Database_Project/src/adminFunction.java" afterPath="$PROJECT_DIR$/Database_Project/src/adminFunction.java" />
-      <change beforePath="$PROJECT_DIR$/Database_Project/src/makeReservationFrame.java" afterPath="$PROJECT_DIR$/Database_Project/src/makeReservationFrame.java" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -21,7 +18,7 @@
         <entry file="file://$PROJECT_DIR$/Database_Project/src/makeReservationFrame.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="1023">
-              <caret line="197" column="23" lean-forward="false" selection-start-line="197" selection-start-column="23" selection-end-line="197" selection-end-column="23" />
+              <caret line="202" column="23" lean-forward="false" selection-start-line="202" selection-start-column="23" selection-end-line="202" selection-end-column="23" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -32,8 +29,8 @@
       <file leaf-file-name="availableRoomsFrame.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/Database_Project/src/availableRoomsFrame.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="2220">
-              <caret line="150" column="28" lean-forward="false" selection-start-line="150" selection-start-column="28" selection-end-line="150" selection-end-column="28" />
+            <state relative-caret-position="2190">
+              <caret line="148" column="28" lean-forward="false" selection-start-line="148" selection-start-column="28" selection-end-line="148" selection-end-column="28" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -324,7 +321,14 @@
       <option name="project" value="LOCAL" />
       <updated>1512441675621</updated>
     </task>
-    <option name="localTasksCounter" value="8" />
+    <task id="LOCAL-00008" summary="View all available rooms for admin">
+      <created>1512701517226</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1512701517226</updated>
+    </task>
+    <option name="localTasksCounter" value="9" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -369,7 +373,8 @@
     <MESSAGE value="connected to database stored online" />
     <MESSAGE value="view reservation working" />
     <MESSAGE value="Ratings added" />
-    <option name="LAST_COMMIT_MESSAGE" value="Ratings added" />
+    <MESSAGE value="View all available rooms for admin" />
+    <option name="LAST_COMMIT_MESSAGE" value="View all available rooms for admin" />
     <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="true" />
     <option name="REFORMAT_BEFORE_PROJECT_COMMIT" value="true" />
     <option name="REARRANGE_BEFORE_PROJECT_COMMIT" value="true" />
@@ -752,7 +757,7 @@
     <entry file="file://$PROJECT_DIR$/Database_Project/src/makeReservationFrame.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1023">
-          <caret line="197" column="23" lean-forward="false" selection-start-line="197" selection-start-column="23" selection-end-line="197" selection-end-column="23" />
+          <caret line="202" column="23" lean-forward="false" selection-start-line="202" selection-start-column="23" selection-end-line="202" selection-end-column="23" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
@@ -761,8 +766,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/Database_Project/src/availableRoomsFrame.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2220">
-          <caret line="150" column="28" lean-forward="false" selection-start-line="150" selection-start-column="28" selection-end-line="150" selection-end-column="28" />
+        <state relative-caret-position="2190">
+          <caret line="148" column="28" lean-forward="false" selection-start-line="148" selection-start-column="28" selection-end-line="148" selection-end-column="28" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
