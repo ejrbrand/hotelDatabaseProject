@@ -1,6 +1,10 @@
 
 // takes user input and then display the data
 
+import org.jdatepicker.impl.JDatePanelImpl;
+import org.jdatepicker.impl.JDatePickerImpl;
+import org.jdatepicker.impl.UtilDateModel;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -9,6 +13,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.Properties;
 
 public class adminCount {
 
@@ -16,7 +21,7 @@ public class adminCount {
 
 	User currentUser;
 	private JFrame frame;
-	private JTextField userInput;
+	private JDatePickerImpl userInput;
 	static String date;
 	private int count = 0;
 
@@ -51,7 +56,7 @@ public class adminCount {
 	}
 
 	public boolean validate() {
-		if (!validateField(userInput)) {
+		if (!validateField(userInput.getJFormattedTextField())) {
 			return false;
 		} else
 			return true;
@@ -94,13 +99,13 @@ public class adminCount {
 				String datePattern = "\\d{4}-\\d{2}-\\d{2}";
 				validate();
 				
-				if (userInput.getText().isEmpty() == true) {
+				if (userInput.getJFormattedTextField().getText().isEmpty() == true) {
 					System.out.println("Field cannot be empty");
-				} else if (!userInput.getText().matches(datePattern)) {
+				} else if (!userInput.getJFormattedTextField().getText().matches(datePattern)) {
 					System.out.println("Incorrect Format");
 				} else {
 					// change to count*
-					date = userInput.getText();
+					date = userInput.getJFormattedTextField().getText();
 					getCount();
 					
 					int input = JOptionPane.showConfirmDialog(null, "Count is " + count, null,
@@ -120,14 +125,16 @@ public class adminCount {
 		btnOk.setBounds(362, 413, 115, 29);
 		frame.getContentPane().add(btnOk);
 
-		userInput = new JTextField();
+		UtilDateModel archiveRatingsDateModel = new UtilDateModel();
+		archiveRatingsDateModel.setDate(2017, 11, 18);
+		Properties p2 = new Properties();
+		p2.put("text.today", "Today");
+		p2.put("text.month", "Month");
+		p2.put("text.year", "Year");
+		JDatePanelImpl departureDatePanel = new JDatePanelImpl(archiveRatingsDateModel, p2);
+		userInput = new JDatePickerImpl(departureDatePanel, new DateLabelFormatter());
 		userInput.setBounds(215, 90, 160, 30);
 		frame.getContentPane().add(userInput);
-		userInput.setColumns(10);
-
-		TextPrompt usernamePrompt = new TextPrompt("yyyy-mm-dd", userInput);
-		usernamePrompt.setForeground(Color.GRAY);
-		usernamePrompt.changeAlpha(150);
 
 	}
 

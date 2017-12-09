@@ -1,3 +1,7 @@
+import org.jdatepicker.impl.JDatePanelImpl;
+import org.jdatepicker.impl.JDatePickerImpl;
+import org.jdatepicker.impl.UtilDateModel;
+
 import java.awt.Color;
 import java.awt.EventQueue;
 
@@ -13,6 +17,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.Properties;
 
 import javax.swing.JButton;
 import javax.swing.SwingConstants;
@@ -21,10 +26,10 @@ import javax.swing.JTextField;
 public class ArchiveFrame {
 
 	private JFrame frame;
-	private JTextField textFieldArchiveRatings;
-	private JTextField textFieldArchiveReservations;
 	private JButton btnOk;
 	Connection connection;
+    JDatePickerImpl archiveRatingsDatePicker;
+    JDatePickerImpl archiveReservationDatePicker;
 	
 	/**
 	 * Launch the application.
@@ -50,6 +55,22 @@ public class ArchiveFrame {
 	}
 
 	/**
+	 * Launch the application.
+	 */
+	public static void main(String[] args) {
+		EventQueue.invokeLater(new Runnable() {
+			public void run() {
+				try {
+					ArchiveFrame window = new ArchiveFrame();
+					window.frame.setVisible(true);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		});
+	}
+
+	/**
 	 * Initialize the contents of the frame.
 	 */
 	private void initialize() {
@@ -68,14 +89,14 @@ public class ArchiveFrame {
 		frame.getContentPane().add(btnArchiveRatings);
 		btnArchiveRatings.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				if(!textFieldArchiveRatings.getText().isEmpty())
+				if(!archiveRatingsDatePicker.getJFormattedTextField().getText().isEmpty())
 				{
 					int input = JOptionPane.showConfirmDialog(null, "Are you sure you want to archive ratings?", null, JOptionPane.INFORMATION_MESSAGE);
 			        System.out.println(input);
 			        if(input == JOptionPane.OK_OPTION)
 			        {
-			        	System.out.println(textFieldArchiveRatings.getText());
-			        	archiveRatings(textFieldArchiveRatings.getText());
+			        	System.out.println(archiveRatingsDatePicker.getJFormattedTextField().getText());
+			        	archiveRatings(archiveRatingsDatePicker.getJFormattedTextField().getText());
 			        }
 				}
 				else
@@ -91,14 +112,14 @@ public class ArchiveFrame {
 		frame.getContentPane().add(btnArchiveReservations);
 		btnArchiveReservations.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				if(!textFieldArchiveReservations.getText().isEmpty())
+				if(!archiveReservationDatePicker.getJFormattedTextField().getText().isEmpty())
 				{
 					int input = JOptionPane.showConfirmDialog(null, "Are you sure you want to archive reservations?", null, JOptionPane.INFORMATION_MESSAGE);
 			        System.out.println(input);
 			        if(input == JOptionPane.OK_OPTION)
 			        {
-			        	System.out.println(textFieldArchiveReservations.getText());
-			        	archiveReservations(textFieldArchiveReservations.getText());
+			        	System.out.println(archiveReservationDatePicker.getJFormattedTextField().getText());
+			        	archiveReservations(archiveReservationDatePicker.getJFormattedTextField().getText());
 			        }
 				}
 				else
@@ -108,27 +129,28 @@ public class ArchiveFrame {
 				
 			}
 		});
-		
-		
-		textFieldArchiveRatings = new JTextField();
-		textFieldArchiveRatings.setBounds(250, 85, 150, 30);
-		frame.getContentPane().add(textFieldArchiveRatings);
-		textFieldArchiveRatings.setColumns(10);
-		
-		TextPrompt archiveRatingsPrompt = new TextPrompt("yyyy-mm-dd", textFieldArchiveRatings);
-		archiveRatingsPrompt.setForeground(Color.GRAY);
-		archiveRatingsPrompt.changeAlpha(150);
 
-		
-		textFieldArchiveReservations = new JTextField();
-		textFieldArchiveReservations.setBounds(250, 150, 150, 30);
-		frame.getContentPane().add(textFieldArchiveReservations);
-		textFieldArchiveReservations.setColumns(10);
-		
-		TextPrompt archiveReservationsPrompt = new TextPrompt("yyyy-mm-dd", textFieldArchiveReservations);
-		archiveReservationsPrompt.setForeground(Color.GRAY);
-		archiveReservationsPrompt.changeAlpha(150);
-		
+		UtilDateModel archiveRatingsDateModel = new UtilDateModel();
+		archiveRatingsDateModel.setDate(2017, 11, 18);
+		Properties p2 = new Properties();
+		p2.put("text.today", "Today");
+		p2.put("text.month", "Month");
+		p2.put("text.year", "Year");
+		JDatePanelImpl departureDatePanel = new JDatePanelImpl(archiveRatingsDateModel, p2);
+		archiveRatingsDatePicker = new JDatePickerImpl(departureDatePanel, new DateLabelFormatter());
+		archiveRatingsDatePicker.setBounds(250, 85, 150, 30);
+		frame.getContentPane().add(archiveRatingsDatePicker);
+
+		UtilDateModel archiveReservationDateModel = new UtilDateModel();
+		archiveReservationDateModel.setDate(2017, 11, 18);
+		Properties properties = new Properties();
+		properties.put("text.today", "Today");
+		properties.put("text.month", "Month");
+		properties.put("text.year", "Year");
+		JDatePanelImpl datePanel = new JDatePanelImpl(archiveReservationDateModel, properties);
+		archiveReservationDatePicker = new JDatePickerImpl(datePanel, new DateLabelFormatter());
+		archiveReservationDatePicker.setBounds(250, 150, 150, 30);
+		frame.getContentPane().add(archiveReservationDatePicker);
 	
 		
 		btnOk = new JButton("OK");

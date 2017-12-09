@@ -36,6 +36,9 @@ public class makeReservationFrame {
 		initialize();
 	}
 
+
+
+
 	/**
 	 * Launch the application.
 	 */
@@ -52,92 +55,112 @@ public class makeReservationFrame {
 		});
 	}
 
+    /**
+     * Launch the application.
+     */
+    public static void main(String[] args) {
+        EventQueue.invokeLater(new Runnable() {
+            public void run() {
+                try {
+                    makeReservationFrame window = new makeReservationFrame();
+                    window.frame.setVisible(true);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+    }
+
 	/**
 	 * Initialize the contents of the frame.
 	 */
 	private void initialize() {
 		frame = new JFrame();
-		frame.setBounds(100, 100, 800, 800);
+		frame.setBounds(100, 100, 500, 500);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
 
 		JLabel lblMakeReservationLabel = new JLabel("Make Reservation");
 		lblMakeReservationLabel.setHorizontalAlignment(SwingConstants.LEFT);
 		lblMakeReservationLabel.setFont(new Font("Tahoma", Font.PLAIN, 30));
-		lblMakeReservationLabel.setBounds(50, 40, 300, 30);
+		lblMakeReservationLabel.setBounds(10, 50, 300, 30);
 		frame.getContentPane().add(lblMakeReservationLabel);
 
 		JLabel lblArrivalDate = new JLabel("Arrival Date");
-		lblArrivalDate.setFont(new Font("Tahoma", Font.PLAIN, 20));
-		lblArrivalDate.setBounds(50, 150, 150, 30);
+		lblArrivalDate.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		lblArrivalDate.setBounds(10, 120, 150, 30);
 		frame.getContentPane().add(lblArrivalDate);
 
-		JLabel lblNumberOfGuests = new JLabel("No. Of Guests");
-		lblNumberOfGuests.setFont(new Font("Tahoma", Font.PLAIN, 20));
-		lblNumberOfGuests.setBounds(50, 310, 150, 30);
+        UtilDateModel arrivaldatemodel = new UtilDateModel();
+        arrivaldatemodel.setDate(2017, 11, 18);
+        Properties p = new Properties();
+        p.put("text.today", "Today");
+        p.put("text.month", "Month");
+        p.put("text.year", "Year");
+        JDatePanelImpl arrivalDatePanel = new JDatePanelImpl(arrivaldatemodel, p);
+        JDatePickerImpl arrivalDatePicker = new JDatePickerImpl(arrivalDatePanel, new DateLabelFormatter());
+        arrivalDatePicker.setBounds(10, 150, 150, 30);
+        frame.getContentPane().add(arrivalDatePicker);
+
+        JLabel lblDepartureDate = new JLabel("Departure Date");
+        lblDepartureDate.setFont(new Font("Tahoma", Font.PLAIN, 18));
+        lblDepartureDate.setBounds(300, 120, 150, 30);
+        frame.getContentPane().add(lblDepartureDate);
+
+        UtilDateModel departuredatemodel = new UtilDateModel();
+        departuredatemodel.setDate(2017, 11, 18);
+        Properties p2 = new Properties();
+        p2.put("text.today", "Today");
+        p2.put("text.month", "Month");
+        p2.put("text.year", "Year");
+        JDatePanelImpl departureDatePanel = new JDatePanelImpl(departuredatemodel, p2);
+        JDatePickerImpl departureDatePicker = new JDatePickerImpl(departureDatePanel, new DateLabelFormatter());
+        departureDatePicker.setBounds(300, 150, 150, 30);
+        frame.getContentPane().add(departureDatePicker);
+
+        JLabel lblNumberOfGuests = new JLabel("No. Of Guests");
+		lblNumberOfGuests.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		lblNumberOfGuests.setBounds(10, 200, 150, 30);
 		frame.getContentPane().add(lblNumberOfGuests);
 
-		JLabel lblComments = new JLabel("Comments");
-		lblComments.setFont(new Font("Tahoma", Font.PLAIN, 20));
-		lblComments.setBounds(50, 390, 150, 30);
+        textFieldNumberOfGuests = new JTextField();
+        textFieldNumberOfGuests.setBounds(10, 230, 150, 30);
+        frame.getContentPane().add(textFieldNumberOfGuests);
+        textFieldNumberOfGuests.setColumns(10);
+
+        JLabel lblRoomType = new JLabel("Room Type");
+        lblRoomType.setFont(new Font("Tahoma", Font.PLAIN, 18));
+        lblRoomType.setBounds(300, 200, 150, 30);
+        frame.getContentPane().add(lblRoomType);
+
+        String[] roomType = { "Standard", "Deluxe", "Luxury", "Suite", "Villa" };
+        JComboBox roomtypecombobox = new JComboBox(roomType);
+        roomtypecombobox.setBounds(300, 230, 150, 30);
+        frame.getContentPane().add(roomtypecombobox);
+
+        JLabel lblComments = new JLabel("Comments");
+		lblComments.setFont(new Font("Tahoma", Font.PLAIN, 18));
+		lblComments.setBounds(10, 280, 150, 30);
 		frame.getContentPane().add(lblComments);
 
-		textFieldNumberOfGuests = new JTextField();
-		textFieldNumberOfGuests.setBounds(215, 310, 150, 30);
-		frame.getContentPane().add(textFieldNumberOfGuests);
-		textFieldNumberOfGuests.setColumns(10);
-
 		JTextPane commentsTextPane = new JTextPane();
-		commentsTextPane.setBounds(215, 390, 500, 200);
+		commentsTextPane.setBounds(10, 310, 400, 100);
 		frame.getContentPane().add(commentsTextPane);
 
-		JLabel lblRoomType = new JLabel("Room Type");
-		lblRoomType.setFont(new Font("Tahoma", Font.PLAIN, 20));
-		lblRoomType.setBounds(400, 310, 150, 30);
-		frame.getContentPane().add(lblRoomType);
-
-		JLabel lblDepartureDate = new JLabel("Departure Date");
-		lblDepartureDate.setFont(new Font("Tahoma", Font.PLAIN, 20));
-		lblDepartureDate.setBounds(400, 150, 150, 30);
-		frame.getContentPane().add(lblDepartureDate);
-
-		JLabel labelArrivalDateCalendar = new JLabel();
-		labelArrivalDateCalendar.setText("Choose Date by selecting below.");
-		labelArrivalDateCalendar.setBounds(150, 150, 150, 150);
-
-		UtilDateModel arrivaldatemodel = new UtilDateModel();
-		arrivaldatemodel.setDate(2017, 11, 18);
-		Properties p = new Properties();
-		p.put("text.today", "Today");
-		p.put("text.month", "Month");
-		p.put("text.year", "Year");
-		JDatePanelImpl arrivalDatePanel = new JDatePanelImpl(arrivaldatemodel, p);
-		JDatePickerImpl arrivalDatePicker = new JDatePickerImpl(arrivalDatePanel, new DateLabelFormatter());
-		arrivalDatePicker.setBounds(215, 150, 150, 30);
-		frame.getContentPane().add(arrivalDatePicker);
-
-		JLabel labelDepartureDateCalendar = new JLabel();
-		labelDepartureDateCalendar.setText("Choose Date by selecting below.");
-		labelDepartureDateCalendar.setBounds(150, 150, 150, 150);
-
-		UtilDateModel departuredatemodel = new UtilDateModel();
-		departuredatemodel.setDate(2017, 11, 18);
-		Properties p2 = new Properties();
-		p2.put("text.today", "Today");
-		p2.put("text.month", "Month");
-		p2.put("text.year", "Year");
-		JDatePanelImpl departureDatePanel = new JDatePanelImpl(departuredatemodel, p2);
-		JDatePickerImpl departureDatePicker = new JDatePickerImpl(departureDatePanel, new DateLabelFormatter());
-		departureDatePicker.setBounds(565, 150, 150, 30);
-		frame.getContentPane().add(departureDatePicker);
-
-		String[] roomType = { "Standard", "Deluxe", "Luxury", "Suite", "Villa" };
-		JComboBox roomtypecombobox = new JComboBox(roomType);
-		roomtypecombobox.setBounds(565, 310, 150, 30);
-		frame.getContentPane().add(roomtypecombobox);
+        JButton btnCancel = new JButton("Cancel");
+        btnCancel.setBounds(160, 420, 150, 30);
+        frame.getContentPane().add(btnCancel);
+        btnCancel.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                frame.setVisible(false);
+                MainMenuFrame rP = new MainMenuFrame();
+                MainMenuFrame.newScreen();
+            }
+        });
+        frame.getContentPane().add(btnCancel);
 
 		JButton btnOk = new JButton("Ok");
-		btnOk.setBounds(627, 685, 150, 30);
+		btnOk.setBounds(310, 420, 150, 30);
 		frame.getContentPane().add(btnOk);
 		btnOk.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -158,18 +181,6 @@ public class makeReservationFrame {
 			}
 		});
 		frame.getContentPane().add(btnOk);
-
-		JButton btnCancel = new JButton("Cancel");
-		btnCancel.setBounds(462, 685, 150, 30);
-		frame.getContentPane().add(btnCancel);
-		btnCancel.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				frame.setVisible(false);
-				MainMenuFrame rP = new MainMenuFrame();
-				MainMenuFrame.newScreen();
-			}
-		});
-		frame.getContentPane().add(btnCancel);
 
 	}
 
