@@ -2,26 +2,15 @@ import org.jdatepicker.impl.JDatePanelImpl;
 import org.jdatepicker.impl.JDatePickerImpl;
 import org.jdatepicker.impl.UtilDateModel;
 
-import java.awt.Color;
-import java.awt.EventQueue;
-
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JOptionPane;
-
-import java.awt.Font;
+import javax.swing.*;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.KeyEvent;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Properties;
-
-import javax.swing.JButton;
-import javax.swing.SwingConstants;
-import javax.swing.JTextField;
 
 public class ArchiveFrame {
 
@@ -158,9 +147,15 @@ public class ArchiveFrame {
 		frame.getContentPane().add(btnOk);
 		btnOk.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+                if (!archiveRatingsDatePicker.getJFormattedTextField().getText().isEmpty()) {
+                    archiveRatings(archiveRatingsDatePicker.getJFormattedTextField().getText());
+                }
+                if (!archiveReservationDatePicker.getJFormattedTextField().getText().isEmpty()) {
+                    archiveReservations(archiveReservationDatePicker.getJFormattedTextField().getText());
+                }
 				frame.setVisible(false);
 				adminFunction aF = new adminFunction();
-				aF.newScreen();
+                adminFunction.newScreen();
 			}
 		});	
 		
