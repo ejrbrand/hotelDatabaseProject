@@ -48,27 +48,43 @@ public class availableRoomsFrame {
     }
 
     /**
+     * Launch the application.
+     */
+    public static void main(String[] args) {
+        EventQueue.invokeLater(new Runnable() {
+            public void run() {
+                try {
+                    availableRoomsFrame window = new availableRoomsFrame();
+                    window.frame.setVisible(true);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+    }
+
+    /**
      * Initialize the contents of the frame.
      */
     private void initialize() {
         frame = new JFrame();
-        frame.setBounds(100, 100, 800, 800);
+        frame.setBounds(100, 100, 500, 500);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.getContentPane().setLayout(null);
 
         JLabel lblArrivalDate = new JLabel("Arrival Date");
         lblArrivalDate.setFont(new Font("Tahoma", Font.PLAIN, 20));
-        lblArrivalDate.setBounds(50, 150, 150, 30);
+        lblArrivalDate.setBounds(10, 50, 150, 30);
         frame.getContentPane().add(lblArrivalDate);
 
         JLabel lblDepartureDate = new JLabel("Departure Date");
         lblDepartureDate.setFont(new Font("Tahoma", Font.PLAIN, 20));
-        lblDepartureDate.setBounds(400, 150, 150, 30);
+        lblDepartureDate.setBounds(300, 50, 150, 30);
         frame.getContentPane().add(lblDepartureDate);
 
         JLabel labelArrivalDateCalendar = new JLabel();
         labelArrivalDateCalendar.setText("Choose Date by selecting below.");
-        labelArrivalDateCalendar.setBounds(150, 150, 150, 150);
+        labelArrivalDateCalendar.setBounds(10, 80, 150, 30);
 
         UtilDateModel arrivaldatemodel = new UtilDateModel();
         arrivaldatemodel.setDate(2017, 11, 18);
@@ -78,12 +94,12 @@ public class availableRoomsFrame {
         p.put("text.year", "Year");
         JDatePanelImpl arrivalDatePanel = new JDatePanelImpl(arrivaldatemodel, p);
         JDatePickerImpl arrivalDatePicker = new JDatePickerImpl(arrivalDatePanel, new DateLabelFormatter());
-        arrivalDatePicker.setBounds(215, 150, 150, 30);
+        arrivalDatePicker.setBounds(10, 100, 150, 30);
         frame.getContentPane().add(arrivalDatePicker);
 
         JLabel labelDepartureDateCalendar = new JLabel();
         labelDepartureDateCalendar.setText("Choose Date by selecting below.");
-        labelDepartureDateCalendar.setBounds(150, 150, 150, 150);
+        labelDepartureDateCalendar.setBounds(300, 80, 150, 30);
 
         UtilDateModel departuredatemodel = new UtilDateModel();
         departuredatemodel.setDate(2017, 11, 18);
@@ -93,24 +109,24 @@ public class availableRoomsFrame {
         p2.put("text.year", "Year");
         JDatePanelImpl departureDatePanel = new JDatePanelImpl(departuredatemodel, p2);
         JDatePickerImpl departureDatePicker = new JDatePickerImpl(departureDatePanel, new DateLabelFormatter());
-        departureDatePicker.setBounds(565, 150, 150, 30);
+        departureDatePicker.setBounds(300, 100, 150, 30);
         frame.getContentPane().add(departureDatePicker);
 
         JLabel lblRoomType = new JLabel("Room Type");
         lblRoomType.setFont(new Font("Tahoma", Font.PLAIN, 20));
-        lblRoomType.setBounds(400, 310, 150, 30);
+        lblRoomType.setBounds(10, 150, 150, 30);
         frame.getContentPane().add(lblRoomType);
 
-        String[] roomType = {"", "Standard", "Deluxe", "Luxury", "Suite", "Villa"};
+        String[] roomType = {"Any", "Standard", "Deluxe", "Luxury", "Suite", "Villa"};
         JComboBox roomtypecombobox = new JComboBox(roomType);
-        roomtypecombobox.setBounds(565, 310, 150, 30);
+        roomtypecombobox.setBounds(10, 180, 150, 30);
         frame.getContentPane().add(roomtypecombobox);
 
         table = new JTable();
         JTableHeader header = table.getTableHeader();
         JPanel panel = new JPanel();
-        panel.setLocation(15, 350);
-        panel.setSize(862, 187);
+        panel.setLocation(10, 220);
+        panel.setSize(450, 200);
         panel.setLayout(new BorderLayout());
         panel.add(header, BorderLayout.NORTH);
         panel.add(table, BorderLayout.CENTER);
@@ -120,7 +136,7 @@ public class availableRoomsFrame {
 
 
         JButton btnCancel = new JButton("Cancel");
-        btnCancel.setBounds(462, 685, 150, 30);
+        btnCancel.setBounds(160, 420, 150, 30);
         frame.getContentPane().add(btnCancel);
         btnCancel.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
@@ -132,7 +148,7 @@ public class availableRoomsFrame {
         frame.getContentPane().add(btnCancel);
 
         JButton btnOk = new JButton("Ok");
-        btnOk.setBounds(627, 685, 150, 30);
+        btnOk.setBounds(310, 420, 150, 30);
         frame.getContentPane().add(btnOk);
         btnOk.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
@@ -140,7 +156,7 @@ public class availableRoomsFrame {
                 departureDate = departureDatePicker.getJFormattedTextField().getText();
                 String combox = roomtypecombobox.getSelectedItem().toString();
                 roomTypeSelection = combox;
-                if (roomTypeSelection.equals("")) {
+                if (roomTypeSelection.equals("Any")) {
                     data = findAllAvailableRooms(arrivalDate, departureDate);
                 } else {
                     data = findAllAvailableRooms(arrivalDate, departureDate, roomTypeSelection);

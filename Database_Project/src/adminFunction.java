@@ -36,6 +36,22 @@ public class adminFunction {
 		});
 	}
 
+
+	/**
+	 * Launch the application.
+	 */
+	public static void main(String[] args) {
+		EventQueue.invokeLater(new Runnable() {
+			public void run() {
+				try {
+					adminFunction window = new adminFunction();
+					window.frame.setVisible(true);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		});
+	}
 	/**
 	 * Initialize the contents of the frame.
 	 */
@@ -54,7 +70,7 @@ public class adminFunction {
 		//-----------------------------------------
 		
 		JButton btnUpdatePassword = new JButton("Update Password");
-		btnUpdatePassword.setBounds(15, 170, 165, 30);
+		btnUpdatePassword.setBounds(15, 100, 165, 30);
 		btnUpdatePassword.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				frame.setVisible(false);
@@ -66,8 +82,8 @@ public class adminFunction {
 		
 		//-----------------------------------------
 		
-		JButton admin_View = new JButton("Admin View");
-		admin_View.setBounds(15, 230, 165, 30);
+		JButton admin_View = new JButton("View All Reservations");
+		admin_View.setBounds(15, 160, 165, 30);
 		admin_View.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent e) {
 				frame.setVisible(false);
@@ -80,8 +96,8 @@ public class adminFunction {
 		
 		//-----------------------------------------
 
-        JButton availableroomsbutton = new JButton("Find All Available rooms between 2 dates");
-        availableroomsbutton.setBounds(310, 230, 165, 30);
+        JButton availableroomsbutton = new JButton("Find Available Rooms");
+        availableroomsbutton.setBounds(15, 220, 165, 30);
         availableroomsbutton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
                 frame.setVisible(false);
@@ -92,7 +108,7 @@ public class adminFunction {
         frame.getContentPane().add(availableroomsbutton);
 
 		JButton archive = new JButton("Archive");
-		archive.setBounds(15, 290, 165, 30);
+		archive.setBounds(300, 100, 165, 30);
 		archive.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				frame.setVisible(false);
@@ -104,29 +120,19 @@ public class adminFunction {
 
 
 		//-----------------------------------------
-		JButton TBE3 = new JButton("Booking by Date");
+		JButton TBE3 = new JButton("Search Reservation");
 		TBE3.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				frame.setVisible(false);
 				adminCount.newScreen();
 			}
 		});
-		TBE3.setBounds(15, 410, 165, 30);
+		TBE3.setBounds(300, 160, 165, 30);
 		frame.getContentPane().add(TBE3);
 		
 		//-----------------------------------------
 
-		
-		JButton TBE = new JButton("TBE");
-		TBE.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-			}
-		});
-		TBE.setBounds(310, 170, 165, 30);
-		frame.getContentPane().add(TBE);
-		
-		
-		//-----------------------------------------
+
 
 		JButton btnLogOut = new JButton("Log Out");
 		btnLogOut.addActionListener(new ActionListener() {
