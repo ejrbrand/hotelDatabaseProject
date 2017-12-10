@@ -79,14 +79,17 @@ public class MainMenuFrame {
 		});
 		frame.getContentPane().add(btnCancelReservation);
 
-		
-		JButton btnEditReservation = new JButton("Edit Reservation");
-		btnEditReservation.addActionListener(new ActionListener() {
+
+		JButton RoomTypeByRatings = new JButton("Ratings by Room Type");
+		RoomTypeByRatings.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				frame.setVisible(false);
+				ratingsbyroomtypeframe ff = new ratingsbyroomtypeframe();
+				ratingsbyroomtypeframe.newScreen();
 			}
 		});
-		btnEditReservation.setBounds(15, 410, 165, 30);
-		//frame.getContentPane().add(btnEditReservation);
+		RoomTypeByRatings.setBounds(15, 410, 165, 30);
+		frame.getContentPane().add(RoomTypeByRatings);
 		
 		JButton btnProvideFeedback = new JButton("Provide Feedback");
 		btnProvideFeedback.addActionListener(new ActionListener() {

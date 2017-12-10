@@ -13,9 +13,9 @@ public class adminView2 {
 
 	private JFrame frame;
 	private JTable table;
-	String[] column_headers = { "Booking ID", "Date Check In", "Date Check Out", "No. of People", "Amount Due", "Paid",
+	String[] column_headers = {"First Name", "Last Name", "Booking ID", "Date Check In", "Date Check Out", "No. of People", "Amount Due", "Paid",
 			"Comments" };
-	String[][] data = new String[100][7];
+	String[][] data = new String[100][9];
 	Connection connection;
 	private JButton btnDone;
 
@@ -47,7 +47,7 @@ public class adminView2 {
 	 */
 	private void initialize() {
 		frame = new JFrame();
-		frame.setBounds(100, 100, 900, 400);
+		frame.setBounds(100, 100, 950, 400);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
 
@@ -84,19 +84,17 @@ public class adminView2 {
 	public String[][] getReservations() {
 		DatabaseConnection conn = new DatabaseConnection();
 		connection = conn.getConnection();
-		String reservationData[][] = new String[100][7];
+		String reservationData[][] = new String[100][9];
 		try {
-			String sql = "SELECT bookingID, dateCheckIn, dateCheckOut, noOfPeople, amountDue, paid, comments "
-					+ "FROM hotelReservation.reservation";
+			String sql = "select first_name, last_name, bookingID, dateCheckIn, datecheckout, noofpeople, amountdue, paid, comments" +
+					" from hotelreservation.reservation join hotelreservation.guest where dateCheckIn = ? AND reservation.uid = guest.uid;";
 
 			PreparedStatement statement = connection.prepareStatement(sql);
-
+			statement.setString(1, adminCount.date);
 			ResultSet rs = statement.executeQuery();
 			int i = 0;
 			while (rs.next()) {
 				//change from hard code
-				if (rs.getString(2).equals(adminCount.date)) {
-					
 					reservationData[i][0] = rs.getString(1);
 					reservationData[i][1] = rs.getString(2);
 					reservationData[i][2] = rs.getString(3);
@@ -104,8 +102,9 @@ public class adminView2 {
 					reservationData[i][4] = rs.getString(5);
 					reservationData[i][5] = rs.getString(6);
 					reservationData[i][6] = rs.getString(7);
+				reservationData[i][7] = rs.getString(8);
+				reservationData[i][8] = rs.getString(9);
 					i++;
-				}
 			}
 			connection.close();
 		} catch (SQLException e) {
