@@ -48,6 +48,22 @@ public class adminCount {
 		});
 	}
 
+    /**
+     * Launch the application.
+     */
+    public static void main(String[] args) {
+        EventQueue.invokeLater(new Runnable() {
+            public void run() {
+                try {
+                    adminCount window = new adminCount();
+                    window.frame.setVisible(true);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+    }
+
 	/**
 	 * Check if textfields are empty
 	 */
@@ -56,10 +72,7 @@ public class adminCount {
 	}
 
 	public boolean validate() {
-		if (!validateField(userInput.getJFormattedTextField())) {
-			return false;
-		} else
-			return true;
+        return validateField(userInput.getJFormattedTextField());
 	}
 
 	/**

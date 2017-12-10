@@ -113,7 +113,7 @@ public class adminFunction {
 			public void actionPerformed(ActionEvent e) {
 				frame.setVisible(false);
 				ArchiveFrame aF = new ArchiveFrame();
-				aF.newScreen(null);
+                ArchiveFrame.newScreen(null);
 			}
 		});
 		frame.getContentPane().add(archive);
@@ -132,6 +132,17 @@ public class adminFunction {
 		
 		//-----------------------------------------
 
+        JButton reservation_count = new JButton("Reservation Count");
+        reservation_count.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                frame.setVisible(false);
+                reservationCountFrame.newScreen();
+            }
+        });
+        reservation_count.setBounds(300, 220, 165, 30);
+        frame.getContentPane().add(reservation_count);
+
+        //-----------------------------------
 
 
 		JButton btnLogOut = new JButton("Log Out");
