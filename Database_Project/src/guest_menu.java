@@ -3,14 +3,14 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class MainMenuFrame {
+public class guest_menu {
 
 	private JFrame frame;
 
 	/**
 	 * Create the application.
 	 */
-	public MainMenuFrame() {
+	public guest_menu() {
 		initialize();
 	}
 
@@ -21,7 +21,7 @@ public class MainMenuFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					MainMenuFrame window = new MainMenuFrame();
+					guest_menu window = new guest_menu();
 					window.frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -50,8 +50,8 @@ public class MainMenuFrame {
 		btnMakeReservation.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				frame.setVisible(false);
-				makeReservationFrame mF = new makeReservationFrame();
-				makeReservationFrame.newScreen(null);
+				guest_makeReservation mF = new guest_makeReservation();
+				guest_makeReservation.newScreen(null);
 			}
 		});
 		frame.getContentPane().add(btnMakeReservation);
@@ -62,8 +62,8 @@ public class MainMenuFrame {
 		btnViewReservation.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent e) {
 				frame.setVisible(false);
-				ViewReservation mF = new ViewReservation();
-				ViewReservation.newScreen(null);
+				guest_ViewReservations mF = new guest_ViewReservations();
+				guest_ViewReservations.newScreen(null);
 			}
 		});
 		
@@ -73,8 +73,8 @@ public class MainMenuFrame {
 		btnCancelReservation.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				frame.setVisible(false);
-				CancelReservation cF = new CancelReservation();
-				CancelReservation.newScreen(null);
+				guest_cancelReservation cF = new guest_cancelReservation();
+				guest_cancelReservation.newScreen(null);
 			}
 		});
 		frame.getContentPane().add(btnCancelReservation);
@@ -84,8 +84,8 @@ public class MainMenuFrame {
 		RoomTypeByRatings.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				frame.setVisible(false);
-				ratingsbyroomtypeframe ff = new ratingsbyroomtypeframe();
-				ratingsbyroomtypeframe.newScreen();
+				guest_popularRooms ff = new guest_popularRooms();
+				guest_popularRooms.newScreen();
 			}
 		});
 		RoomTypeByRatings.setBounds(15, 410, 165, 30);
@@ -95,8 +95,8 @@ public class MainMenuFrame {
 		btnProvideFeedback.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				frame.setVisible(false);
-				FeedbackFrame ff = new FeedbackFrame();
-				FeedbackFrame.newScreen();
+				guest_provideFeedback ff = new guest_provideFeedback();
+				guest_provideFeedback.newScreen();
 			}
 		});
 		btnProvideFeedback.setBounds(310, 170, 165, 30);
@@ -113,9 +113,9 @@ public class MainMenuFrame {
 		JButton btnLogOut = new JButton("Log Out");
 		btnLogOut.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				launchAppFrame window = new launchAppFrame();
+				MainClass window = new MainClass();
 				frame.setVisible(false);
-				launchAppFrame.main(null);
+				MainClass.main(null);
 			}
 		});
 		btnLogOut.setBounds(315, 410, 160, 30);

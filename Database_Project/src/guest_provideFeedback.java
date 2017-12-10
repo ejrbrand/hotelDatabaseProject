@@ -6,7 +6,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
-public class FeedbackFrame {
+public class guest_provideFeedback {
 
     JFrame frame;
     JLabel bookingIDlbl;
@@ -23,7 +23,7 @@ public class FeedbackFrame {
     /**
      * Create the application.
      */
-    public FeedbackFrame() {
+    public guest_provideFeedback() {
         initialize();
     }
 
@@ -34,7 +34,7 @@ public class FeedbackFrame {
         EventQueue.invokeLater(new Runnable() {
             public void run() {
                 try {
-                    FeedbackFrame window = new FeedbackFrame();
+                    guest_provideFeedback window = new guest_provideFeedback();
                     window.frame.setVisible(true);
                 } catch (Exception e) {
                     e.printStackTrace();
@@ -102,8 +102,8 @@ public class FeedbackFrame {
                 } else {
                     frame.setVisible(false);
                     insertRating(bookingID, stars, feedback);
-                    MainMenuFrame mf = new MainMenuFrame();
-                    MainMenuFrame.newScreen();
+                    guest_menu mf = new guest_menu();
+                    guest_menu.newScreen();
                 }
             }
         });
@@ -112,8 +112,8 @@ public class FeedbackFrame {
         btnCancel.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 frame.setVisible(false);
-                MainMenuFrame mF = new MainMenuFrame();
-                MainMenuFrame.newScreen();
+                guest_menu mF = new guest_menu();
+                guest_menu.newScreen();
             }
         });
         btnCancel.setBounds(15, 335, 115, 30);

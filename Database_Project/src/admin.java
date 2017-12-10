@@ -117,9 +117,9 @@ public class admin {
                     } else {
                         if (validateCredentials(usernameTextField.getText(), passwordField.getText())) {
                             frame.setVisible(false);
-                            
-                            adminFunction rR = new adminFunction();
-                            adminFunction.newScreen();
+
+                            admin_menu rR = new admin_menu();
+                            admin_menu.newScreen();
                         } else {
                             frame.getContentPane().add(lblincorrect);
                             frame.revalidate();
@@ -150,9 +150,9 @@ public class admin {
                 } else {
                     if (validateCredentials(usernameTextField.getText(), passwordField.getText())) {
                         frame.setVisible(false);
-                        
-                        adminFunction rR = new adminFunction();
-                        adminFunction.newScreen();
+
+                        admin_menu rR = new admin_menu();
+                        admin_menu.newScreen();
                     } else {
                         frame.getContentPane().add(lblincorrect);
                         frame.revalidate();
@@ -179,8 +179,8 @@ public class admin {
         btnCancel.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 frame.setVisible(false);
-                launchAppFrame mF = new launchAppFrame();
-                launchAppFrame.main(null);
+                MainClass mF = new MainClass();
+                MainClass.main(null);
             }
         });
         btnCancel.setBounds(15, 290, 115, 30);

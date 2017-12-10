@@ -1,13 +1,12 @@
-
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
-import java.awt.event.KeyAdapter;
-import java.awt.event.KeyEvent;
 
 public class admin_updatePassword {
 
@@ -108,7 +107,7 @@ public class admin_updatePassword {
 		btnCancel.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				frame.setVisible(false);
-				launchAppFrame.main(null);
+				MainClass.main(null);
 			}
 		});
 		btnCancel.setBounds(241, 413, 115, 29);
@@ -132,8 +131,8 @@ public class admin_updatePassword {
 		                    // DATABASE DELETE STUFF
 		                    frame.setVisible(false);
 
-		    				adminFunction rP = new adminFunction();
-		    				adminFunction.newScreen();
+							admin_menu rP = new admin_menu();
+							admin_menu.newScreen();
 		                }
 		                else 
 		                {
@@ -190,8 +189,8 @@ public class admin_updatePassword {
 			                    // DATABASE DELETE STUFF
 			                    frame.setVisible(false);
 
-			    				adminFunction rP = new adminFunction();
-			    				adminFunction.newScreen();
+								admin_menu rP = new admin_menu();
+								admin_menu.newScreen();
 			                }
 			                else 
 			                {

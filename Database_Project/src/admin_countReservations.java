@@ -6,7 +6,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-public class reservationCountFrame {
+public class admin_countReservations {
 
     Connection connection;
     private JFrame frame;
@@ -14,7 +14,7 @@ public class reservationCountFrame {
     /**
      * Create the application.
      */
-    public reservationCountFrame() {
+    public admin_countReservations() {
         initialize();
     }
 
@@ -25,7 +25,7 @@ public class reservationCountFrame {
         EventQueue.invokeLater(new Runnable() {
             public void run() {
                 try {
-                    reservationCountFrame window = new reservationCountFrame();
+                    admin_countReservations window = new admin_countReservations();
                     window.frame.setVisible(true);
                 } catch (Exception e) {
                     e.printStackTrace();
@@ -41,7 +41,7 @@ public class reservationCountFrame {
         EventQueue.invokeLater(new Runnable() {
             public void run() {
                 try {
-                    reservationCountFrame window = new reservationCountFrame();
+                    admin_countReservations window = new admin_countReservations();
                     window.frame.setVisible(true);
                 } catch (Exception e) {
                     e.printStackTrace();

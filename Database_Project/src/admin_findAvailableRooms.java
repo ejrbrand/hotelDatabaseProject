@@ -11,7 +11,7 @@ import java.awt.event.ActionListener;
 import java.sql.*;
 import java.util.Properties;
 
-public class availableRoomsFrame {
+public class admin_findAvailableRooms {
 
     Connection connection;
     DefaultTableModel model;
@@ -27,7 +27,7 @@ public class availableRoomsFrame {
     /**
      * Create the application.
      */
-    public availableRoomsFrame() {
+    public admin_findAvailableRooms() {
         initialize();
     }
 
@@ -38,7 +38,7 @@ public class availableRoomsFrame {
         EventQueue.invokeLater(new Runnable() {
             public void run() {
                 try {
-                    availableRoomsFrame window = new availableRoomsFrame();
+                    admin_findAvailableRooms window = new admin_findAvailableRooms();
                     window.frame.setVisible(true);
                 } catch (Exception e) {
                     e.printStackTrace();
@@ -54,7 +54,7 @@ public class availableRoomsFrame {
         EventQueue.invokeLater(new Runnable() {
             public void run() {
                 try {
-                    availableRoomsFrame window = new availableRoomsFrame();
+                    admin_findAvailableRooms window = new admin_findAvailableRooms();
                     window.frame.setVisible(true);
                 } catch (Exception e) {
                     e.printStackTrace();
@@ -141,8 +141,8 @@ public class availableRoomsFrame {
         btnCancel.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 frame.setVisible(false);
-                adminFunction af = new adminFunction();
-                adminFunction.newScreen();
+                admin_menu af = new admin_menu();
+                admin_menu.newScreen();
             }
         });
         frame.getContentPane().add(btnCancel);

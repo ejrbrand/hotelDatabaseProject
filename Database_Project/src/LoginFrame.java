@@ -119,8 +119,8 @@ public class LoginFrame {
                         if (validateCredentials(usernameTextField.getText(), passwordField.getText())) {
                             frame.setVisible(false);
                             User currentUser = new User(usernameTextField.getText());
-                            MainMenuFrame rR = new MainMenuFrame();
-                            MainMenuFrame.newScreen();
+                            guest_menu rR = new guest_menu();
+                            guest_menu.newScreen();
                         } else {
                             frame.getContentPane().add(lblincorrect);
                             frame.revalidate();
@@ -149,8 +149,8 @@ public class LoginFrame {
                     if (validateCredentials(usernameTextField.getText(), passwordField.getText())) {
                         frame.setVisible(false);
                         User currentUser = new User(usernameTextField.getText());
-                        MainMenuFrame rR = new MainMenuFrame();
-                        MainMenuFrame.newScreen();
+                        guest_menu rR = new guest_menu();
+                        guest_menu.newScreen();
                     } else {
                         frame.getContentPane().add(lblincorrect);
                         frame.revalidate();
@@ -177,8 +177,8 @@ public class LoginFrame {
         btnCancel.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 frame.setVisible(false);
-                launchAppFrame mF = new launchAppFrame();
-                launchAppFrame.main(null);
+                MainClass mF = new MainClass();
+                MainClass.main(null);
             }
         });
         btnCancel.setBounds(15, 290, 115, 30);

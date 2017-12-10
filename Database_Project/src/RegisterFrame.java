@@ -2,13 +2,13 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.Properties;
-import java.awt.event.KeyAdapter;
-import java.awt.event.KeyEvent;
 
 public class RegisterFrame {
 
@@ -162,8 +162,8 @@ public class RegisterFrame {
         btnCancel.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 frame.setVisible(false);
-                launchAppFrame mF = new launchAppFrame();
-                launchAppFrame.main(null);
+                MainClass mF = new MainClass();
+                MainClass.main(null);
             }
         });
         btnCancel.setBounds(241, 413, 115, 29);

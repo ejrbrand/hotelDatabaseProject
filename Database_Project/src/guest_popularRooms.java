@@ -8,7 +8,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-public class ratingsbyroomtypeframe {
+public class guest_popularRooms {
     Connection connection;
     String[] column_headers = {"Room Type", "Avg Rating", "No of reviewers"};
     String[][] data = new String[100][3];
@@ -19,7 +19,7 @@ public class ratingsbyroomtypeframe {
     /**
      * Create the application.
      */
-    public ratingsbyroomtypeframe() {
+    public guest_popularRooms() {
         initialize();
     }
 
@@ -30,7 +30,7 @@ public class ratingsbyroomtypeframe {
         EventQueue.invokeLater(new Runnable() {
             public void run() {
                 try {
-                    ratingsbyroomtypeframe window = new ratingsbyroomtypeframe();
+                    guest_popularRooms window = new guest_popularRooms();
                     window.frame.setVisible(true);
                 } catch (Exception e) {
                     e.printStackTrace();
@@ -46,7 +46,7 @@ public class ratingsbyroomtypeframe {
         EventQueue.invokeLater(new Runnable() {
             public void run() {
                 try {
-                    ratingsbyroomtypeframe window = new ratingsbyroomtypeframe();
+                    guest_popularRooms window = new guest_popularRooms();
                     window.frame.setVisible(true);
                 } catch (Exception e) {
                     e.printStackTrace();
@@ -87,7 +87,7 @@ public class ratingsbyroomtypeframe {
         btnDone.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 frame.setVisible(false);
-                MainMenuFrame.newScreen();
+                guest_menu.newScreen();
             }
         });
         frame.getContentPane().add(btnDone);
